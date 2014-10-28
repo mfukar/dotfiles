@@ -1,0 +1,8 @@
+settings set target.use-hex-immediates true
+settings set target.hex-immediates-style asm
+
+settings set target.x86-disassembly-flavor intel
+
+settings set target.load-script-from-symbol-file true
+
+target create /Volumes/KernelDebugKit/mach_kernel

@@ -2,8 +2,8 @@ startup_message off
 defscrollback 50000
 vbell off
 
-bindkey ^[[D prev # 
-bindkey ^[[C next # 
+bindkey ^[[D prev #
+bindkey ^[[C next #
 
 termcapinfo xterm* ti@:te@
 

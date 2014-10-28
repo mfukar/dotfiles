@@ -1,0 +1,2 @@
+[ -f $HOME/.pythonrc ]  && export PYTHONSTARTUP="${HOME}/.pythonrc"
+[ -d $HOME/lib/python ] && export PYTHONPATH="${HOME}/lib/python"

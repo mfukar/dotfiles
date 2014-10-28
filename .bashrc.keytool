@@ -1,0 +1,30 @@
+keytool_add() 
+{
+	store=${1:-cacerts.bks}
+	target=${2:-ca.der}
+	alias=${3:-PortSwigger}
+	echo "Will add certificate [$target] to store [$store] under alias [$alias]"
+	read -p "Press [Return] to proceed.."
+	keytool -keystore "${store}" -storetype BKS -provider org.bouncycastle.jce.provider.BouncyCastleProvider -storepass "" -importcert -trustcacerts -alias "${alias}" -file "${target}"
+}
+
+keytool_remove()
+{
+	store=${1:-cacerts.bks}
+	alias=${3:-PortSwigger}
+	echo "Will remove certificate aliased [$alias] from store [$store]"
+	read -p "Press [Return] to proceed.."
+	keytool -keystore "${store}" -storetype BKS -provider org.bouncycastle.jce.provider.BouncyCastleProvider -storepass "" -delete -alias "${alias}"
+}
+
+keytool_list()
+{
+	store=${1:-cacerts.bks}
+	echo "Will list certificates in store [$store]"
+	keytool -list -v -keystore "${store}" -provider org.bouncycastle.jce.provider.BouncyCastleProvider -storetype BKS -storepass "" | less
+}
+
+keytool_search()
+{
+	keytool_list $2 | grep $1
+}

@@ -233,7 +233,7 @@ c.TerminalInteractiveShell.autoindent = True
 # Set to confirm when you try to exit IPython with an EOF (Control-D in Unix,
 # Control-Z/Enter in Windows). By typing 'exit' or 'quit', you can force a
 # direct exit without any confirmation.
-# c.TerminalInteractiveShell.confirm_exit = True
+c.TerminalInteractiveShell.confirm_exit = False
 
 # Set the size of the output cache.  The default is 1000, you can change it
 # permanently in your config file.  Setting it to 0 completely disables the
@@ -256,7 +256,7 @@ c.TerminalInteractiveShell.autoindent = True
 # c.TerminalInteractiveShell.autoedit_syntax = False
 
 # Set the color scheme (NoColor, Linux, or LightBG).
-c.TerminalInteractiveShell.colors = 'Linux'
+c.TerminalInteractiveShell.colors = 'LightBG'
 
 # 'all', 'last', 'last_expr' or 'none', specifying which nodes should be run
 # interactively (displaying output from expressions).
@@ -326,7 +326,7 @@ c.TerminalInteractiveShell.colors = 'Linux'
 # Use colors for displaying information about objects. Because this information
 # is passed through a pager (like 'less'), and some pagers get confused with
 # color codes, this capability can be turned off.
-# c.TerminalInteractiveShell.color_info = True
+c.TerminalInteractiveShell.color_info = False
 
 # The part of the banner to be printed after the profile
 # c.TerminalInteractiveShell.banner2 = ''

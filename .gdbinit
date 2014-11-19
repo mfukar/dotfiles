@@ -66,6 +66,13 @@ set $SKIPSTEP = 1
 set $ARMOPCODES = 1
 # x86 disassembly flavor: 0 for Intel, 1 for AT&T
 set $X86FLAVOR = 0
+# set disassembly flavor right away:
+if $X86FLAVOR == 0
+    set disassembly-flavor intel
+else
+    set disassembly-flavor att
+end
+
 
 set confirm off
 set verbose off

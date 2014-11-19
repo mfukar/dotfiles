@@ -20,13 +20,18 @@ export EDITOR=$__vim
 export HG_EDITOR=$__vim
 
 # common environment aliases (mfukar):
+if [ $__os = "Linux" ]; then
+	alias l='ls -lAFhG --color=auto'
+else
+	alias l='ls -hlAFG'
+fi
+
 alias hexdump='hexdump -C'
-alias golf='ruby ~/lib/golfscript.rb'
+alias golf='ruby ${HOME}/lib/golfscript.rb'
 alias rm='rm -i'
 alias grep="grep -n --color=auto --exclude-dir='.hg' --exclude-dir=\"target.*\""
 alias egrep='grep -E'
 alias ps='ps -ef'
-alias l='ls -lAFhG'
 alias vim=$__vim
 # Linux style:
 #   -nbad -bap -nbc -bbo -hnl -br -brs -c33 -cd33 -ncdb -ce -ci4

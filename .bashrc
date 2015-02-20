@@ -38,7 +38,6 @@ alias vim=$__vim
 #   -cli0 -d0 -di1 -nfc1 -i8 -ip0 -l80 -lp -npcs -nprs -npsl -sai
 #   -saf -saw -ncs -nsc -sob -nfca -cp33 -ss -ts8 -il1
 alias indent='indent -linux -l102 -cbi0 -ut -sc'
-alias route='sudo /sbin/route add 155.207.33.42 10.9.141.81 255.255.255.0'
 
 # common environment setup (mfukar):
 # include and library paths - no other script should set these:
@@ -48,7 +47,7 @@ export KERNELTAGS=''
 export KERNEL_CSCOPE_DB=''
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib/
-export PATH=${PATH}:${HOME}/bin
+export PATH=${PATH}:${HOME}/bin:${HOME}/bin/adt-bundle-mac-x86_64-20140702/sdk/platform-tools
 
 export LESS="-r -X"
 

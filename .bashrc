@@ -157,7 +157,7 @@ json()
 
 7zu()
 {
-	7za x "$@"
+	7za x -o"$@.contents" -- "$@"
 }
 
 # jump back multiple directories just by typing multiple dots:

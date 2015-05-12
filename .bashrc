@@ -64,7 +64,9 @@ if [ -f /usr/bin/dircolors -a $__os = "Linux" ]; then
 fi
 
 # map CTRL+Left to backward-word and CTRL+Right to forward-word:
-bind -f ~/.inputrc
+if [[ $- == *i* ]]; then
+    bind -f ~/.inputrc
+fi
 
 # don't put duplicate lines in the history:
 HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
@@ -92,21 +94,23 @@ PAGER="/bin/sh -c \"unset PAGER;col -bx | \
 BLOCKSIZE=K; export BLOCKSIZE
 
 # Color and other string capability definitions:
-BLACK=$(tput setaf 0)
-RED=$(tput setaf 1)
-GREEN=$(tput setaf 2)
-BROWN=$(tput sgr0 ; tput setaf 3)
-BLUE=$(tput sgr0 ; tput setaf 4)
-MAGENTA=$(tput setaf 5)
-CYAN=$(tput setaf 6)
-LIGHT_GRAY=$(tput setaf 7)
-DARK_GRAY=$(tput bold ; tput setaf 0)
-WHITE=$(tput bold ; tput setaf 7)
-BRIGHT=$(tput bold)
-NO_COLOR=$(tput sgr0)
-REVERSE=$(tput smso)
-UNDERLINE=$(tput smul)
-BLINK=$(tput blink)
+if [[ $- == *i* ]]; then
+    BLACK=$(tput setaf 0)
+    RED=$(tput setaf 1)
+    GREEN=$(tput setaf 2)
+    BROWN=$(tput sgr0 ; tput setaf 3)
+    BLUE=$(tput sgr0 ; tput setaf 4)
+    MAGENTA=$(tput setaf 5)
+    CYAN=$(tput setaf 6)
+    LIGHT_GRAY=$(tput setaf 7)
+    DARK_GRAY=$(tput bold ; tput setaf 0)
+    WHITE=$(tput bold ; tput setaf 7)
+    BRIGHT=$(tput bold)
+    NO_COLOR=$(tput sgr0)
+    REVERSE=$(tput smso)
+    UNDERLINE=$(tput smul)
+    BLINK=$(tput blink)
+fi
 
 # defining this here because it's used in the prompt:
 __parse_git_branch() {

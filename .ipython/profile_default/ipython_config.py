@@ -28,7 +28,7 @@ c = get_config()
 
 # A list of dotted module names of IPython extensions to load.
 c.InteractiveShellApp.extensions = [
-    'memory_profiler_ext',
+#    'memory_profiler_ext',
 ]
 
 # Configure matplotlib for interactive use with the default matplotlib backend.

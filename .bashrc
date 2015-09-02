@@ -47,7 +47,11 @@ export KERNELTAGS=''
 export KERNEL_CSCOPE_DB=''
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib/
+
+# Android stuff:
 export PATH=${PATH}:${HOME}/bin:${HOME}/bin/adt-bundle-mac-x86_64-20140702/sdk/platform-tools
+# Haskell stuff:
+export PATH=${PATH}:~/Library/Haskell/bin
 
 export LESS="-r -X"
 
@@ -84,6 +88,11 @@ shopt -s extglob
 # enable programmable completion features:
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
+fi
+
+# ..and for OS X:
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
 fi
 
 # terminal & prompt definitions:

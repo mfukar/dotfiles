@@ -205,6 +205,19 @@ gdiff()
     git svn log -r"$rev" --stat -p
 }
 
+# Alias to remove git submodules:
+rm_git_submodule() {
+	TMP_FILE=`mktemp /tmp/blob.XXXXXXXXXX`
+	sed -e "/$1/d" .gitmodules > $TMP_FILE
+	mv $TMP_FILE .gitmodules
+	rm -f $TMP_FILE
+	git commit .gitmodules -m "Removes $1 from .gitmodules"
+	git rm --cached bundle/$1
+	git commit -m "Deletes path to submodule $1"
+	# Launch git log to review changes before pushing:
+	git log -p
+}
+
 # set terminal title:
 function title {
     echo -ne "\033]0;"$*"\007"

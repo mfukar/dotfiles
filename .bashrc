@@ -48,10 +48,12 @@ export KERNEL_CSCOPE_DB=''
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib/
 
-# Android stuff:
-export PATH=${PATH}:${HOME}/bin:${HOME}/bin/adt-bundle-mac-x86_64-20140702/sdk/platform-tools:${HOME}/bin/adt-bundle-mac-x86_64-20140702/sdk/tools
+# Various stuff might be inside $HOME/bin/:
+export PATH=${PATH}:${HOME}/bin
 # Haskell stuff:
 export PATH=${PATH}:~/Library/Haskell/bin
+# Add RVM to PATH:
+export PATH="$PATH:$HOME/.rvm/bin"
 
 export LESS="-r -X"
 
@@ -152,6 +154,9 @@ esac
 # OpenSSL helpers setup:
 [ -f $HOME/.bashrc.openssl ] && . $HOME/.bashrc.openssl
 
+# Various helpers for Android cross-compiling setup:
+[ -f $HOME/.bashrc.android-dev ] && . $HOME/.bashrc.android-dev
+
 # Useful functions:
 
 # Pretty-pring JSON using python's json module and pygments. Doesn't use colors if
@@ -228,4 +233,3 @@ dlresume() {
 	export ec=18; while [ $ec -eq 18 ]; do /usr/bin/curl -O -C - "${1}"; export ec=$?; done
 }
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

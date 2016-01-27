@@ -15,17 +15,17 @@ verify_libcrypto() {
 # Set up the environment:
 # ANDROID_NDK_ROOT="/Users/mfukar/Library/AndroidSDK/ndk-bundle"
 # APP_PLATFORM=android-21
-# 
+#
 # . ./setenv-android.sh
-# 
+#
 # perl -pi -e 's/install: all install_docs install_sw/install: install_docs install_sw/g' Makefile.org
-# 
+#
 # ./Configure android-armv7 no-ssl2 no-ssl3 no-comp no-hw no-engine
-# 
+#
 # make depend
-# 
+#
 # make all
-# 
+#
 # # Verify:
 # find . -iname libcrypto.a
 # otool -ah libcrypto.a

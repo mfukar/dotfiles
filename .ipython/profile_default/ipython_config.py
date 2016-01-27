@@ -27,9 +27,9 @@ c = get_config()
 # c.InteractiveShellApp.file_to_run = ''
 
 # A list of dotted module names of IPython extensions to load.
-c.InteractiveShellApp.extensions = [
+#c.InteractiveShellApp.extensions = [
 #    'memory_profiler_ext',
-]
+#]
 
 # Configure matplotlib for interactive use with the default matplotlib backend.
 # c.InteractiveShellApp.matplotlib = None
@@ -94,9 +94,9 @@ c.InteractiveShellApp.exec_PYTHONSTARTUP = True
 # c.TerminalIPythonApp.copy_config_files = False
 
 # A list of dotted module names of IPython extensions to load.
-c.TerminalIPythonApp.extensions = [
-    'memory_profiler_ext',
-]
+#c.TerminalIPythonApp.extensions = [
+#    'memory_profiler_ext',
+#]
 
 # Set the log level by value or name.
 # c.TerminalIPythonApp.log_level = 30

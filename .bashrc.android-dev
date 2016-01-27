@@ -1,0 +1,42 @@
+# The NDK root is used by multiple tools:
+export ANDROID_NDK_ROOT="/Users/mfukar/Library/AndroidSDK/ndk-bundle"
+
+
+# Used by openssl build scripts:
+export APP_PLATFORM="android-21"
+
+# Verify OpenSSL's libcrypto:
+verify_libcrypto() {
+    find . -iname libcrypto.a -exec otool -ah {} \;
+    find . -iname libcrypto.a -exec $ANDROID_TOOLCHAIN//arm-linux-androideabi-readelf -h libcrypto.a | grep -i 'class\|machine' | head -2 \;
+}
+
+# To build OpenSSL for Android, do the following:
+# Set up the environment:
+# ANDROID_NDK_ROOT="/Users/mfukar/Library/AndroidSDK/ndk-bundle"
+# APP_PLATFORM=android-21
+# 
+# . ./setenv-android.sh
+# 
+# perl -pi -e 's/install: all install_docs install_sw/install: install_docs install_sw/g' Makefile.org
+# 
+# ./Configure android-armv7 no-ssl2 no-ssl3 no-comp no-hw no-engine
+# 
+# make depend
+# 
+# make all
+# 
+# # Verify:
+# find . -iname libcrypto.a
+# otool -ah libcrypto.a
+# $ANDROID_TOOLCHAIN//arm-linux-androideabi-readelf -h libcrypto.a | grep -i 'class\|machine' | head -2
+#
+
+
+# Used by PJSIP build scripts:
+
+export TARGET_ABI="armeabi-v7a"
+# export TARGET_ABI="x86"
+
+# Used like so: TARGET_ABI=armeabi-v7a ./configure-android --use-ndk-cflags
+

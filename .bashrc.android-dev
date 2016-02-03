@@ -1,8 +1,11 @@
 # The NDK root is used by multiple tools:
 export ANDROID_NDK_ROOT="/Users/mfukar/Library/AndroidSDK/ndk-bundle"
 
+export ANDROID_SDK_ROOT="/Users/mfukar/Library/AndroidSDK"
 
-# Used by openssl build scripts:
+export PATH="$PATH:$ANDROID_NDK_ROOT:$ANDROID_NDK_ROOT/tools:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools"
+
+# Used by various build scripts:
 export APP_PLATFORM="android-21"
 
 # Verify OpenSSL's libcrypto:
@@ -11,32 +14,38 @@ verify_libcrypto() {
     find . -iname libcrypto.a -exec $ANDROID_TOOLCHAIN//arm-linux-androideabi-readelf -h libcrypto.a | grep -i 'class\|machine' | head -2 \;
 }
 
-# To build OpenSSL for Android, do the following:
-# Set up the environment:
-# ANDROID_NDK_ROOT="/Users/mfukar/Library/AndroidSDK/ndk-bundle"
-# APP_PLATFORM=android-21
-#
-# . ./setenv-android.sh
-#
-# perl -pi -e 's/install: all install_docs install_sw/install: install_docs install_sw/g' Makefile.org
-#
-# ./Configure android-armv7 no-ssl2 no-ssl3 no-comp no-hw no-engine
-#
-# make depend
-#
-# make all
-#
-# # Verify:
-# find . -iname libcrypto.a
-# otool -ah libcrypto.a
-# $ANDROID_TOOLCHAIN//arm-linux-androideabi-readelf -h libcrypto.a | grep -i 'class\|machine' | head -2
-#
-
 
 # Used by PJSIP build scripts:
-
-export TARGET_ABI="armeabi-v7a"
+export TARGET_ABI="armeabi"
+# export TARGET_ABI="armeabi-v7a"
 # export TARGET_ABI="x86"
 
-# Used like so: TARGET_ABI=armeabi-v7a ./configure-android --use-ndk-cflags
+# Used like so:
+build-pjsip() {
+    pushd ~/Documents/census/csc/pjsip
+    pushd ../openssl-1.0.2e/lib
+    case "$TARGET_ABI" in
+    armeabi) readonly ABI="generic" ;;
+    armeabi-v7a) readonly ABI="generic" ;;
+    arm64-v8a) readonly ABI="generic_arm64" ;;
+    x86) readonly ABI="generic_x86" ;;
+    x86_64) readonly ABI="generic_x86_64" ;;
+    mips) readonly ABI="generic_mips" ;;
+    mips64) readonly ABI="generic_mips64" ;;
+    esac
+    cp $ABI/obj/SHARED_LIBRARIES/libcrypto_intermediates/LINKED/libcrypto.so . && cp $ABI/obj/SHARED_LIBRARIES/libssl_intermediates/LINKED/libssl.so .
+    popd
+    CFLAGS=-I/Users/mfukar/Documents/census/csc/openssl-1.0.2e/include LDFLAGS="-L/Users/mfukar/Documents/census/csc/openssl-1.0.2e" ./configure-android --use-ndk-cflags --with-ssl=/Users/mfukar/Documents/census/csc/openssl-1.0.2e
+    make -j2 dep && make clean && make -j4
+    pushd pjsip-apps/src/swig
+    make
+    cp java/android/libs/armeabi/libpjsua2.so ~/StudioProjects/hijni/app/jniLibs/$TARBET_ABI/
+    popd
+}
 
+build_csc() {
+    pushd $CSC_DIR
+    cp -r $PJSIP_DIR/pjsip-apps/src/swig/java/android/src .
+    rm -r src/org/pjsip/pjsua2/app
+    cp -r $PJSIP_DIR/pjsip-apps/src/swig/java/android/libs .
+}

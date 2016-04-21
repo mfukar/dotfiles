@@ -74,6 +74,9 @@ if [[ $- == *i* ]]; then
     bind -f ~/.inputrc
 fi
 
+# include an ISO8601 timestamp in the history:
+export HISTTIMEFORMAT="%FT%T "
+
 # don't put duplicate lines in the history:
 HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
 

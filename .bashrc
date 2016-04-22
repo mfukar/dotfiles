@@ -26,6 +26,8 @@ else
 	alias l='ls -hlAFG'
 fi
 
+alias peek='less -nU'
+alias tail='less -nUEX +F'
 alias hexdump='hexdump -C'
 alias golf='ruby ${HOME}/lib/golfscript.rb'
 alias rm='rm -i'

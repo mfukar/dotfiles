@@ -1,7 +1,6 @@
 [user]
     name = Michael Foukarakis
-    #email = mfukar@census-labs.com
-    email = michael.foukarakis@ioactive.com
+    email = michael.foukarakis@bmw-carit.de
 [http]
     sslVerify = false
 [gui]

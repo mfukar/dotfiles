@@ -57,9 +57,6 @@ export PATH=${PATH}:~/Library/Haskell/bin
 # Add RVM to PATH:
 export PATH="$PATH:$HOME/.rvm/bin"
 
-# GitHub API token for Homebrew:
-export HOMEBREW_GITHUB_API_TOKEN="720513a16bd9d831a7848940512841d95742d724"
-
 export LESS="-r -X"
 
 # workaround for an iTerm2 bug:
@@ -167,6 +164,9 @@ esac
 
 # BMW-specific stuff:
 [ -f $HOME/.bashrc.bmw ] && . $HOME/.bashrc.bmw
+
+# GitHub API token for Homebrew:
+[ -f $HOME/.homebrew.token ] && . $HOME/.homebrew.token
 
 # Useful functions:
 

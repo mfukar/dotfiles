@@ -1,1 +1,24 @@
+# Depends on the abbreviations file being in ~/Documents,
+# fine for the time being:
+bmwspeak() {
+    QUOTEFILE="${HOME}/Documents/abbrevs-utf8.csv"
+
+    # Query terms:
+    if [ "$#" -ne 0 ]; then
+        set -f
+        for term in $*; do
+            defs=$(\grep "^${term}" "${QUOTEFILE}")
+            for def in $defs; do
+                echo -e "BMW abbreviation of the day:\n ${def}" | sed -e 's/;/ - /' | cowsay | lolcat
+            done
+        done
+        set +f
+        return
+    fi
+
+    # Present a random term:
+    n=$(wc -l "${QUOTEFILE}" | cut -d' ' -f4)
+    c=$(($RANDOM%$n))
+    echo -e "BMW abbreviation of the day:\n" $(sed "${c}q;d" "${QUOTEFILE}" | sed -e 's/;/ - /') | cowsay | lolcat
+}
 

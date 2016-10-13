@@ -2,15 +2,15 @@
 
 # source global definitions:
 if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
+    . /etc/bashrc
 fi
 
 __os=$(uname)
 
 if [ $__os = "Darwin" ]; then
-	__vim="mvim -v"
+    __vim="mvim -v"
 else
-	__vim="gvim -v"
+    __vim="gvim -v"
 fi
 
 # override the default umask:
@@ -21,9 +21,9 @@ export HG_EDITOR=$__vim
 
 # common environment aliases (mfukar):
 if [ $__os = "Linux" ]; then
-	alias l='ls -lAFhG --color=auto'
+    alias l='ls -lAFhG --color=auto'
 else
-	alias l='ls -hlAFG'
+    alias l='ls -hlAFG'
 fi
 
 alias peek='less -nU'
@@ -61,7 +61,7 @@ export LESS="-r -X"
 
 # workaround for an iTerm2 bug:
 if [ $__os = "Darwin" ]; then
-	export LANG='en_US'
+    export LANG='en_US'
 fi
 
 # dircolors:
@@ -174,25 +174,25 @@ esac
 # pygmentize doesn't exist:
 json()
 {
-	command -v pygmentize >/dev/null 2>&1 || command -v pygmentize-3.4 >/dev/null 2>&1 || {python -m json.tool}
-	python -m json.tool | pygmentize-3.4 -l javascript
+    command -v pygmentize >/dev/null 2>&1 || command -v pygmentize-3.4 >/dev/null 2>&1 || {python -m json.tool}
+    python -m json.tool | pygmentize-3.4 -l javascript
 }
 
 # compress/uncompress using LZMA:
 7zc()
 {
-	7za a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on archive.7z "$@"
+    7za a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on archive.7z "$@"
 }
 
 7zu()
 {
-	7za x -o"$@.contents" -- "$@"
+    7za x -o"$@.contents" -- "$@"
 }
 
 # jump back multiple directories just by typing multiple dots:
 ti()
 {
-	# If it doesn't contain 3 or more dots, defer to builtin:
+    # If it doesn't contain 3 or more dots, defer to builtin:
     if [ `expr "$1" : '\.\.\.*'` -le 2 ]; then
         cd $1;
         return;
@@ -223,15 +223,15 @@ gdiff()
 
 # Alias to remove git submodules:
 rm_git_submodule() {
-	TMP_FILE=`mktemp /tmp/blob.XXXXXXXXXX`
-	sed -e "/$1/d" .gitmodules > $TMP_FILE
-	mv $TMP_FILE .gitmodules
-	rm -f $TMP_FILE
-	git commit .gitmodules -m "Removes $1 from .gitmodules"
-	git rm --cached bundle/$1
-	git commit -m "Deletes path to submodule $1"
-	# Launch git log to review changes before pushing:
-	git log -p
+    TMP_FILE=`mktemp /tmp/blob.XXXXXXXXXX`
+    sed -e "/$1/d" .gitmodules > $TMP_FILE
+    mv $TMP_FILE .gitmodules
+    rm -f $TMP_FILE
+    git commit .gitmodules -m "Removes $1 from .gitmodules"
+    git rm --cached bundle/$1
+    git commit -m "Deletes path to submodule $1"
+    # Launch git log to review changes before pushing:
+    git log -p
 }
 
 # set terminal title:
@@ -241,6 +241,6 @@ function title {
 
 # download a URL with cURL, resuming when interrupted:
 dlresume() {
-	export ec=18; while [ $ec -eq 18 ]; do /usr/bin/curl -O -C - "${1}"; export ec=$?; done
+    export ec=18; while [ $ec -eq 18 ]; do /usr/bin/curl -O -C - "${1}"; export ec=$?; done
 }
 

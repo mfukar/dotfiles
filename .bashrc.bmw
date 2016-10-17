@@ -3,14 +3,27 @@
 bmwspeak() {
     QUOTEFILE="${HOME}/Documents/abbrevs-utf8.csv"
 
+    while getopts ":id" opt; do
+        case $opt in
+            i)
+                CASE_INSENSITIVE='-i'
+                ;;
+            \?)
+                return 1
+                ;;
+        esac
+    done
+
     # Query terms:
     if [ "$#" -ne 0 ]; then
         set -f
         for term in $*; do
-            defs=$(\grep "^${term}" "${QUOTEFILE}")
+            defs=$(\grep ${CASE_INSENSITIVE} "^${term}" "${QUOTEFILE}")
+            SIFS=$IFS; IFS=$'\n'
             for def in $defs; do
                 echo -e "BMW abbreviation of the day:\n ${def}" | sed -e 's/;/ - /' | cowsay | lolcat
             done
+            IFS=$SIFS
         done
         set +f
         return

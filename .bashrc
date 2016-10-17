@@ -159,9 +159,6 @@ esac
 # OpenSSL helpers setup:
 [ -f $HOME/.bashrc.openssl ] && . $HOME/.bashrc.openssl
 
-# Various helpers for Android cross-compiling setup:
-[ -f $HOME/.bashrc.android-dev ] && . $HOME/.bashrc.android-dev
-
 # BMW-specific stuff:
 [ -f $HOME/.bashrc.bmw ] && . $HOME/.bashrc.bmw
 

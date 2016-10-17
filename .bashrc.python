@@ -1,2 +1,11 @@
 [ -f $HOME/.pythonrc ]  && export PYTHONSTARTUP="${HOME}/.pythonrc"
 [ -d $HOME/lib/python ] && export PYTHONPATH="${HOME}/lib/python"
+
+# Specifically for use with Voltron. If it breaks stuff move it to a function and call it
+# from .[gdb|lldb]init :
+if [ $__os = "Darwin" ]; then
+	[ -d $HOME/Library/Python/2.7/lib/python2.7/site-packages ] && export PYTHONPATH="${HOME}/Library/Python/2.7/lib/python2.7/site-packages"
+	[ -d $HOME/Library/Python/2.7/bin ] && export PATH="${PATH}:${HOME}/Library/Python/2.7/bin"
+fi
+
+

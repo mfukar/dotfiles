@@ -4031,3 +4031,4 @@ document pwstring
     pwstring s - Prints content, length, capacity and ref-count of wstring s
 end
 #EOF
+source /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/voltron/entry.py

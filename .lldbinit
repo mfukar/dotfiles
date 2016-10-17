@@ -6,3 +6,4 @@ settings set target.x86-disassembly-flavor intel
 settings set target.load-script-from-symbol-file true
 
 target create /Volumes/KernelDebugKit/mach_kernel
+command script import /Users/michael.foukarakis/Library/Python/2.7/lib/python/site-packages/voltron/entry.py

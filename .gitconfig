@@ -21,3 +21,7 @@
     default = matching
 [gc]
 	auto = 256
+[pull]
+	rebase = true
+[gitreview]
+	remote = origin

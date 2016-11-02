@@ -170,12 +170,11 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 # Useful functions:
 
-# Pretty-pring JSON using python's json module and pygments. Doesn't use colors if
+# Pretty-print JSON using python's json module and pygments. Doesn't use colors if
 # pygmentize doesn't exist:
-json()
-{
-    command -v pygmentize >/dev/null 2>&1 || command -v pygmentize-3.4 >/dev/null 2>&1 || {python -m json.tool}
-    python -m json.tool | pygmentize-3.4 -l javascript
+json() {
+    command -v pygmentize >/dev/null 2>&1 || {python -m json.tool}
+    python -m json.tool | pygmentize -l javascript
 }
 
 # compress/uncompress using LZMA:

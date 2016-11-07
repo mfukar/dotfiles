@@ -35,3 +35,9 @@ bmwspeak() {
     echo -e "BMW abbreviation of the day:\n" $(sed "${c}q;d" "${QUOTEFILE}" | sed -e 's/;/ - /') | cowsay | lolcat
 }
 
+sync-date() {
+    while [ true ]; do
+        ssh $1 "date -s \"@$( date +%s )\"" && echo "Date set.";
+        sleep 100;
+    done
+}

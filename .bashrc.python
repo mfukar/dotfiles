@@ -2,7 +2,7 @@
 [ -d $HOME/lib/python ] && export PYTHONPATH="${HOME}/lib/python"
 
 # Specifically for use with Voltron. On macOS, it completely breaks everything, so the
-# shells can't be used for anything else Python. Ideally, call it from .[gdb|lldb]init :
+# shells can't be used for anything else Python:
 prep-voltron() {
     if [ $__os = "Darwin" ]; then
         [ -d $HOME/Library/Python/2.7/lib/python2.7/site-packages ] && export PYTHONPATH="${HOME}/Library/Python/2.7/lib/python2.7/site-packages"

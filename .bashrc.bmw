@@ -1,5 +1,5 @@
-# Depends on the abbreviations file being in ~/Documents,
-# fine for the time being:
+# Depends on the abbreviations file being in ~/Documents/,
+# which is fine for me:
 bmwspeak() {
     QUOTEFILE="${HOME}/Documents/abbrevs-utf8.csv"
 
@@ -41,3 +41,8 @@ sync-date() {
         sleep 100;
     done
 }
+
+alias go-build='pushd /media/michaelf/build/base'
+alias clean-build=''
+alias clear-cache=''
+

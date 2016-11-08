@@ -42,7 +42,10 @@ sync-date() {
     done
 }
 
-alias go-build='pushd /media/michaelf/build/base'
+
+BUILD_BASE_DIR='/media/michaelf/build/base'
+alias go-build="pushd ${BUILD_BASE_DIR}"
 alias clean-build=''
 alias clear-cache=''
 
+alias bb-shell="cd ${BUILD_BASE_DIR} && ./bci-build-scripts/build.sh --bitbake-shell --silent"

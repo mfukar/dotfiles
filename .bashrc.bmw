@@ -42,6 +42,38 @@ sync-date() {
     done
 }
 
+if [ $__os = "Darwin" ]; then
+
+view-boot() {
+    if [ "$#" -ne 1 ]; then
+        MGU="mgu-lucia"
+    else
+        MGU=$1
+    fi
+
+    ssh $MGU "systemd-analyze plot > /tmp/boot-plot-${MGU}.svg" && scp $MGU:/tmp/boot-plot-$MGU.svg /tmp && open /tmp/boot-plot-$MGU.svg
+}
+
+view-deps() {
+    case "$#" in
+        2)
+            MGU=$1
+            UNIT=$2
+            ;;
+        1)
+            MGU="mgu-lucia"
+            UNIT=$1
+            ;;
+        *)
+            echo "Provide a unit."
+            return -1
+            ;;
+    esac
+
+    ssh $MGU "systemd-analyze dot > /tmp/${UNIT}-deps.dot ${UNIT}" && scp $MGU:/tmp/$UNIT-deps.dot /tmp && cat /tmp/$UNIT-deps.dot | dot -Tsvg > /tmp/$UNIT-deps.svg && open /tmp/$UNIT-deps.svg
+}
+
+fi
 
 BUILD_BASE_DIR='/media/michaelf/build/base'
 alias go-build="pushd ${BUILD_BASE_DIR}"

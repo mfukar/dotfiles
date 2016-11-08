@@ -81,3 +81,4 @@ alias clean-build=''
 alias clear-cache=''
 
 alias bb-shell="cd ${BUILD_BASE_DIR} && ./bci-build-scripts/build.sh --bitbake-shell --silent"
+

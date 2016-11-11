@@ -41,7 +41,7 @@ alias vim=$__vim
 #   -saf -saw -ncs -nsc -sob -nfca -cp33 -ss -ts8 -il1
 alias indent='indent -linux -l102 -cbi0 -ut -sc'
 # clang-format all .c files you come across:
-alias clang-format-all='find `pwd` -iname *.c -exec sh -c "clang-format {} > /tmp/f && mv /tmp/f {}" \;'
+alias clang-format-all='find `pwd` -iname "*.c" -exec sh -c "clang-format {} > /tmp/f && mv /tmp/f {}" \;'
 
 # common environment setup (mfukar):
 # include and library paths - no other script should set these:

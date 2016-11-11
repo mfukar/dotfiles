@@ -55,22 +55,25 @@ view-boot() {
 }
 
 view-deps() {
-    case "$#" in
-        2)
-            MGU=$1
-            UNIT=$2
-            ;;
-        1)
-            MGU="mgu-lucia"
-            UNIT=$1
-            ;;
-        *)
-            echo "Provide a unit."
-            return -1
-            ;;
-    esac
+    if [ "$#" -lt 1 ]; then
+        echo "Provide a unit."
+        return -1
+    fi
 
-    ssh $MGU "systemd-analyze dot > /tmp/${UNIT}-deps.dot ${UNIT}" && scp $MGU:/tmp/$UNIT-deps.dot /tmp && cat /tmp/$UNIT-deps.dot | dot -Tsvg > /tmp/$UNIT-deps.svg && open /tmp/$UNIT-deps.svg
+    if [ "$#" -lt 2 ]; then
+        MGU="mgu-lucia"
+        UNIT=$1
+    else
+        MGU=$1
+        shift
+        UNIT="$@"
+    fi
+
+    if [ "$#" -gt 2 ]; then
+        ssh $MGU "systemd-analyze dot > /tmp/unit-deps.dot ${UNIT}" && scp $MGU:/tmp/unit-deps.dot /tmp && cat /tmp/unit-deps.dot | dot -Tsvg > /tmp/unit-deps.svg && open /tmp/unit-deps.svg
+    else
+        ssh $MGU "systemd-analyze dot > /tmp/${UNIT}-deps.dot ${UNIT}" && scp $MGU:/tmp/$UNIT-deps.dot /tmp && cat /tmp/$UNIT-deps.dot | dot -Tsvg > /tmp/$UNIT-deps.svg && open /tmp/$UNIT-deps.svg
+    fi
 }
 
 fi

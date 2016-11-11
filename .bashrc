@@ -147,9 +147,6 @@ esac
 # Colors from GCC messages?
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# java setup:
-[ -f $HOME/.bashrc.java ] && . $HOME/.bashrc.java
-
 # python setup:
 [ -f $HOME/.bashrc.python ] && . $HOME/.bashrc.python
 

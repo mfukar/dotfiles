@@ -61,7 +61,7 @@ view-blame() {
         MGU=$1
     fi
 
-    ssh $MGU "systemd-analyze blame > /tmp/blame-${MGU}.svg" && scp $MGU:/tmp/blame-$MGU.svg /tmp && open /tmp/blame-$MGU.svg
+    ssh $MGU "systemd-analyze blame"
 }
 
 view-deps() {

@@ -54,6 +54,16 @@ view-boot() {
     ssh $MGU "systemd-analyze plot > /tmp/boot-plot-${MGU}.svg" && scp $MGU:/tmp/boot-plot-$MGU.svg /tmp && open /tmp/boot-plot-$MGU.svg
 }
 
+view-blame() {
+    if [ "$#" -ne 1 ]; then
+        MGU="mgu-lucia"
+    else
+        MGU=$1
+    fi
+
+    ssh $MGU "systemd-analyze blame > /tmp/blame-${MGU}.svg" && scp $MGU:/tmp/blame-$MGU.svg /tmp && open /tmp/blame-$MGU.svg
+}
+
 view-deps() {
     if [ "$#" -lt 1 ]; then
         echo "Provide a unit."

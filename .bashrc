@@ -132,7 +132,11 @@ fi
 
 # defining this here because it's used in the prompt:
 __parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/:\1/'
+	# Valid git repository. Continue to produce the prompt, and set the window title, too:
+	if git rev-parse --git-dir > /dev/null 2>&1; then
+		title $(basename `git rev-parse --show-toplevel`)
+		git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/:\1/'
+	fi
 }
 
 # set prompt. Do not use colour codes for 'dumb' terminals (like VIM's):

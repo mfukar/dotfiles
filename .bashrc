@@ -42,6 +42,8 @@ alias vim=$__vim
 alias indent='indent -linux -l102 -cbi0 -ut -sc'
 # clang-format all .c files you come across:
 alias clang-format-all='find `pwd` -iname "*.c" -exec sh -c "clang-format {} > /tmp/f && mv /tmp/f {}" \;'
+# Alias for building with CMake out-of-source:
+alias cmake-build='rm -rf ./build && mkdir -p build && pushd build && cmake .. && popd'
 
 # common environment setup (mfukar):
 # include and library paths - no other script should set these:
@@ -132,11 +134,11 @@ fi
 
 # defining this here because it's used in the prompt:
 __parse_git_branch() {
-	# Valid git repository. Continue to produce the prompt, and set the window title, too:
-	if git rev-parse --git-dir > /dev/null 2>&1; then
-		title $(basename `git rev-parse --show-toplevel`)
-		git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/:\1/'
-	fi
+    # Valid git repository. Continue to produce the prompt, and set the window title, too:
+    if git rev-parse --git-dir > /dev/null 2>&1; then
+        title $(basename `git rev-parse --show-toplevel`)
+        git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/:\1/'
+    fi
 }
 
 # set prompt. Do not use colour codes for 'dumb' terminals (like VIM's):

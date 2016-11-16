@@ -10,3 +10,6 @@ prep-voltron() {
     fi
 }
 
+# Directory under $HOME where Python3-specific packages end up, e.g. nosetests:
+# Might be breaking things under macOS.
+export PATH="${PATH}:${HOME}/Library/Python/3.5/bin/"

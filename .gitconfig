@@ -20,8 +20,8 @@
 [push]
     default = matching
 [gc]
-	auto = 256
+    auto = 256
 [pull]
-	rebase = true
+    rebase = true
 [gitreview]
-	remote = origin
+    remote = origin

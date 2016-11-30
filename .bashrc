@@ -178,14 +178,19 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # GitHub API token for Homebrew:
 [ -f $HOME/.homebrew.token ] && . $HOME/.homebrew.token
 
-# Useful functions:
-
+# Pretty-printers
+#
 # Pretty-print JSON using python's json module and pygments. Doesn't use colors if
 # pygmentize doesn't exist:
 json() {
     command -v pygmentize >/dev/null 2>&1 || {python -m json.tool}
     python -m json.tool | pygmentize -l javascript
 }
+# For systemd units and ini files:
+alias cat-ini='pygmentize -l ini'
+alias cat-unit='cat-ini'
+
+# Useful functions:
 
 # compress/uncompress using LZMA:
 7zc()

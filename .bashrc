@@ -249,7 +249,7 @@ rm_git_submodule() {
 }
 
 # set terminal title:
-function title {
+title() {
     echo -ne "\033]0;"$*"\007"
 }
 
@@ -258,3 +258,20 @@ dlresume() {
     export ec=18; while [ $ec -eq 18 ]; do /usr/bin/curl -O -C - "${1}"; export ec=$?; done
 }
 
+# Perform a command in successive pairs of array elements:
+do-pairwise() {
+    echo $#
+    if [ $# -ne 2 ]; then
+        return -1
+    fi
+    local -n array=$1
+    local command=$2
+
+    while [ ${#array[@]} -gt 1 ]; do
+        cmd=$(printf "$command" ${array[0]} ${array[1]})
+
+        $cmd
+
+        array=(${array[@]:1})
+    done
+}

@@ -95,3 +95,13 @@ alias clear-cache=''
 
 alias bb-shell="cd ${BUILD_BASE_DIR} && ./bci-build-scripts/build.sh --bitbake-shell --silent"
 
+
+# Remote-task related stuff, which don't need their own space yet:
+#
+# Alias force-connecting to a host via SSH:
+autoconnect() {
+   while [ true ]; do
+       ssh -o ConnectTimeout=5 $1
+       sleep 5
+   done
+}

@@ -255,7 +255,9 @@ title() {
 
 # download a URL with cURL, resuming when interrupted:
 dlresume() {
-    export ec=18; while [ $ec -eq 18 ]; do /usr/bin/curl -O -C - "${1}"; export ec=$?; done
+    while [ $ec -ne 0 ]; do
+        /usr/bin/curl -O -C - "${1}"
+    done
 }
 
 # Perform a command in successive pairs of array elements:

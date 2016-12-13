@@ -261,18 +261,14 @@ dlresume() {
 }
 
 # Perform a command in successive pairs of array elements:
-do-pairwise() {
-    echo $#
-    if [ $# -ne 2 ]; then
+cmp-pairwise() {
+    if [ $# -ne 1 ]; then
         return -1
     fi
     local -n array=$1
-    local command=$2
 
     while [ ${#array[@]} -gt 1 ]; do
-        cmd=$(printf "$command" ${array[0]} ${array[1]})
-
-        $cmd
+        python ~/Downloads/c2a9806/scripts/bootreport/bootcompare.py -o "${array[0]}" -n "${array[1]}"
 
         array=(${array[@]:1})
     done

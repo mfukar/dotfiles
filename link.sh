@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # A script to soft-link everything necessary (and some things optional)
 # to the CURRENT DIRECTORY.
 #
@@ -21,3 +22,7 @@ ln -s dotfiles/.gdbinit .gdbinit
 ln -s dotfiles/.screenrc .screenrc
 ln -s dotfiles/.clang-format .clang-format
 ln -s dotfiles/.ipython .ipython
+
+# zsh config:
+ln -s dotfiles/.zshrc .zshrc
+

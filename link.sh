@@ -22,6 +22,7 @@ ln -s dotfiles/.gdbinit .gdbinit
 ln -s dotfiles/.screenrc .screenrc
 ln -s dotfiles/.clang-format .clang-format
 ln -s dotfiles/.ipython .ipython
+ln -s dotfiles/.pythonrc .pythonrc
 
 # zsh config:
 ln -s dotfiles/.zshrc .zshrc

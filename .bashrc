@@ -187,8 +187,14 @@ json() {
     python -m json.tool | pygmentize -l javascript
 }
 # For systemd units and ini files:
-alias cat-ini='pygmentize -l ini'
-alias cat-unit='cat-ini'
+cat_ini() {
+    for unit in "$@"; do
+        echo "$(tput bold)$unit$(tput sgr0)"
+        pygmentize -l ini $unit
+    done
+}
+alias cat-init='cat_ini'
+alias cat-unit='cat_ini'
 
 # Useful functions:
 
@@ -255,7 +261,7 @@ title() {
 
 # download a URL with cURL, resuming when interrupted:
 dlresume() {
-    while [ $ec -ne 0 ]; do
+    while [ $? -ne 0 ]; do
         /usr/bin/curl -O -C - "${1}"
     done
 }

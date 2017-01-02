@@ -51,6 +51,9 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+# Workaround for terminator bug:
+[[ $(uname) = "Linux" && $COLORTERM = gnome-terminal && ! $TERM = screen-256color ]] && TERM=xterm-256color
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration

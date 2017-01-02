@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/michael.foukarakis/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Theme. See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes :
 ZSH_THEME="powerlevel9k/powerlevel9k"

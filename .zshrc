@@ -87,14 +87,10 @@ else
   export EDITOR='mvim'
 fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 __os=$(uname)
-
 
 # Set aliases overriding those provided by oh-my-zsh.
 

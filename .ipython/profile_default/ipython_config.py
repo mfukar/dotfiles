@@ -256,7 +256,7 @@ c.TerminalInteractiveShell.confirm_exit = False
 # c.TerminalInteractiveShell.autoedit_syntax = False
 
 # Set the color scheme (NoColor, Linux, or LightBG).
-c.TerminalInteractiveShell.colors = 'neutral'
+c.TerminalInteractiveShell.colors = 'Linux'
 
 c.TerminalInteractiveShell.highlighting_style = 'friendly'
 

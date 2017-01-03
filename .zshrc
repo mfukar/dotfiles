@@ -80,13 +80,6 @@ export LESS="-r -X"
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
-
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
@@ -101,6 +94,14 @@ else
     __vim="gvim -v"
     alias l='ls -lAFhG --color=auto'
 fi
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR=$__vim
+fi
+
 alias vim=$__vim
 alias peek='less -nU'
 alias hexdump='hexdump -C'

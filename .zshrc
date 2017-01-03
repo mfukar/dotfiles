@@ -77,6 +77,14 @@ export PATH="$PATH:$HOME/.rvm/bin"
 # Make less attempt to display raw chars:
 export LESS="-r -X"
 
+# Set a suitable pager using vim:
+PAGER="/bin/sh -c \"unset PAGER;col -bx | \
+    $__vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
+    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
+    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""; export PAGER
+# Set a default blocksize for GNU programs (ls, df, du):
+BLOCKSIZE=K; export BLOCKSIZE
+
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 

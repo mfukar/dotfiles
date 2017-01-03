@@ -125,6 +125,7 @@ alias cat-unit='cat-ini'
 export LSCOLORS="exfxcxdxbxbxbxbxbxbxbx"
 
 # powerlevel9k config & colors:
+POWERLEVEL9K_MODE='awesome-patched'
 POWERLEVEL9K_SHORTEN_STRATEGY='truncate_middle'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH='4'
 POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND='00'

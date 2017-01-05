@@ -51,8 +51,16 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+# Find the OS:
+__os=$(uname)
+
 # Workaround for terminator bug:
 [[ $(uname) = "Linux" && $COLORTERM = gnome-terminal && ! $TERM = screen-256color ]] && TERM=xterm-256color
+
+# Custom autocompletion functions:
+if [[ $__os =~ "Darwin" ]]; then
+    fpath=( /usr/local/share/zsh/site-functions "${fpath[@]}" )
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -62,6 +70,10 @@ source $ZSH/oh-my-zsh.sh
 
 # override the default umask:
 umask 077
+
+# nuke shared history:
+unsetopt share_history
+
 
 # Environment setup
 #
@@ -91,7 +103,6 @@ export LANG=en_US.UTF-8
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-__os=$(uname)
 
 # Set aliases overriding those provided by oh-my-zsh.
 
@@ -174,7 +185,7 @@ cat_ini() {
         pygmentize -l ini $unit
     done
 }
-alias cat-init='cat_ini'
+alias cat-ini='cat_ini'
 alias cat-unit='cat_ini'
 
 # Useful functions

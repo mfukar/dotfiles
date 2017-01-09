@@ -130,7 +130,7 @@ alias grep="grep -n --color=auto --exclude-dir='.hg' --exclude-dir=\"target.*\""
 alias egrep='grep -E'
 alias ps='ps -ef'
 # clang-format all .c files you come across:
-alias clang-format-all='find `pwd` -iname "*.c" -exec sh -c "clang-format {} > /tmp/f && mv /tmp/f {}" \;'
+alias clang-format-all='find `pwd` -iname "*.h" -or -iname "*.c" -o -iname "*.cpp" -o -iname "*.hpp" -exec sh -c "clang-format {} > /tmp/f && mv /tmp/f {}" \;'
 # Alias for building with CMake out-of-source:
 alias cmake-build='rm -rf ./build && mkdir -p build && pushd build && cmake .. && popd'
 

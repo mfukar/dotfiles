@@ -379,7 +379,7 @@ if [[ $__os =~ "Darwin" ]]; then
 
 view-boot() {
     if [ "$#" -ne 1 ]; then
-        MGU="mgu-lucia"
+        MGU="${MGU:-mgu-lucia}"
     else
         MGU=$1
     fi
@@ -389,7 +389,7 @@ view-boot() {
 
 view-blame() {
     if [ "$#" -ne 1 ]; then
-        MGU="mgu-lucia"
+        MGU="${MGU:-mgu-lucia}"
     else
         MGU=$1
     fi
@@ -404,7 +404,7 @@ view-deps() {
     fi
 
     if [ "$#" -lt 2 ]; then
-        MGU="mgu-lucia"
+        MGU="${MGU:-mgu-lucia}"
         UNIT=$1
     else
         MGU=$1

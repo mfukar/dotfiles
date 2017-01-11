@@ -194,6 +194,11 @@ alias cat-unit='cat_ini'
 
 # Useful functions
 #
+# retry a command or function until a zero exit code:
+retry() {
+    while [ $? -ne 0 ]; do $@; done
+}
+
 # compress/uncompress using LZMA:
 7zc()
 {

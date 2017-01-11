@@ -74,6 +74,10 @@ umask 077
 # nuke shared history:
 unsetopt share_history
 
+# iTerm2's shell integration:
+if [[ $__os =~ "Darwin" ]]; then
+    source ~/.iterm2_shell_integration.`basename $SHELL`
+fi
 
 # Environment setup
 #

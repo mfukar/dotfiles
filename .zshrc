@@ -386,47 +386,47 @@ sync-date() {
 
 if [[ $__os =~ "Darwin" ]]; then
 
-view-boot() {
-    if [ "$#" -ne 1 ]; then
-        MGU="${MGU:-mgu-lucia}"
-    else
-        MGU=$1
-    fi
+    view-boot() {
+        if [ "$#" -ne 1 ]; then
+            MGU="${MGU:-mgu-lucia}"
+        else
+            MGU=$1
+        fi
 
-    ssh $MGU "systemd-analyze plot > /tmp/boot-plot-${MGU}.svg" && scp $MGU:/tmp/boot-plot-$MGU.svg /tmp && open /tmp/boot-plot-$MGU.svg
-}
+        ssh $MGU "systemd-analyze plot > /tmp/boot-plot-${MGU}.svg" && scp $MGU:/tmp/boot-plot-$MGU.svg /tmp && open /tmp/boot-plot-$MGU.svg
+    }
 
-view-blame() {
-    if [ "$#" -ne 1 ]; then
-        MGU="${MGU:-mgu-lucia}"
-    else
-        MGU=$1
-    fi
+    view-blame() {
+        if [ "$#" -ne 1 ]; then
+            MGU="${MGU:-mgu-lucia}"
+        else
+            MGU=$1
+        fi
 
-    ssh $MGU "systemd-analyze blame"
-}
+        ssh $MGU "systemd-analyze blame"
+    }
 
-view-deps() {
-    if [ "$#" -lt 1 ]; then
-        echo "Provide a unit."
-        return -1
-    fi
+    view-deps() {
+        if [ "$#" -lt 1 ]; then
+            echo "Provide a unit."
+            return -1
+        fi
 
-    if [ "$#" -lt 2 ]; then
-        MGU="${MGU:-mgu-lucia}"
-        UNIT=$1
-    else
-        MGU=$1
-        shift
-        UNIT="$@"
-    fi
+        if [ "$#" -lt 2 ]; then
+            MGU="${MGU:-mgu-lucia}"
+            UNIT=$1
+        else
+            MGU=$1
+            shift
+            UNIT="$@"
+        fi
 
-    if [ "$#" -gt 1 ]; then
-        ssh $MGU "systemd-analyze dot > /tmp/unit-deps.dot ${UNIT}" && scp $MGU:/tmp/unit-deps.dot /tmp/ && cat /tmp/unit-deps.dot | dot -Tsvg > /tmp/unit-deps.svg && open /tmp/unit-deps.svg
-    else
-        ssh $MGU "systemd-analyze dot > /tmp/${UNIT}-deps.dot ${UNIT}" && scp $MGU:/tmp/$UNIT-deps.dot /tmp && cat /tmp/$UNIT-deps.dot | dot -Tsvg > /tmp/$UNIT-deps.svg && open /tmp/$UNIT-deps.svg
-    fi
-}
+        if [ "$#" -gt 1 ]; then
+            ssh $MGU "systemd-analyze dot > /tmp/unit-deps.dot ${UNIT}" && scp $MGU:/tmp/unit-deps.dot /tmp/ && cat /tmp/unit-deps.dot | dot -Tsvg > /tmp/unit-deps.svg && open /tmp/unit-deps.svg
+        else
+            ssh $MGU "systemd-analyze dot > /tmp/${UNIT}-deps.dot ${UNIT}" && scp $MGU:/tmp/$UNIT-deps.dot /tmp && cat /tmp/$UNIT-deps.dot | dot -Tsvg > /tmp/$UNIT-deps.svg && open /tmp/$UNIT-deps.svg
+        fi
+    }
 
 fi
 

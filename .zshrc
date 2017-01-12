@@ -79,6 +79,15 @@ if [[ $__os =~ "Darwin" ]]; then
     source ~/.iterm2_shell_integration.`basename $SHELL`
 fi
 
+# Set aliases overriding those provided by oh-my-zsh.
+if [[ $__os =~ "Darwin" ]]; then
+    __vim="mvim -v"
+    alias l='ls -lAFhG'
+else
+    __vim="gvim -v"
+    alias l='ls -lAFhG --color=auto'
+fi
+
 # Environment setup
 #
 # Homebrew:
@@ -108,15 +117,6 @@ export LANG=en_US.UTF-8
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 
-# Set aliases overriding those provided by oh-my-zsh.
-
-if [[ $__os =~ "Darwin" ]]; then
-    __vim="mvim -v"
-    alias l='ls -lAFhG'
-else
-    __vim="gvim -v"
-    alias l='ls -lAFhG --color=auto'
-fi
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then

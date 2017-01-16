@@ -176,12 +176,22 @@ POWERLEVEL9K_VI_MODE_NORMAL_FOREGROUND='236'
 # Colors from GCC messages?
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# Pretty-print JSON using python's json module and pygments. Doesn't use colors if
-# pygmentize doesn't exist:
-json() {
-    command -v pygmentize >/dev/null 2>&1 || {python -m json.tool}
-    python -m json.tool | pygmentize -l javascript
+# JSON:
+cat_json() {
+    for jsonfile in "$@"; do
+        echo "$(tput bold)$jsonfile$(tput sgr0)"
+        pygmentize $jsonfile
+    done
 }
+
+# For patches:
+cat_patch() {
+    for patch in "$@"; do
+        echo "$(tput bold)$patch$(tput sgr0)"
+        pygmentize $patch
+    done
+}
+
 # For systemd units and ini files:
 cat_ini() {
     for unit in "$@"; do
@@ -189,6 +199,8 @@ cat_ini() {
         pygmentize -l ini $unit
     done
 }
+alias cat-json='cat_json'
+alias cat-patch='cat_patch'
 alias cat-ini='cat_ini'
 alias cat-unit='cat_ini'
 

@@ -25,5 +25,7 @@ ln -s dotfiles/.ipython .ipython
 ln -s dotfiles/.pythonrc .pythonrc
 
 # zsh config:
+ln -s dotfiles/oh-my-zsh .oh-my-zsh
+git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 ln -s dotfiles/.zshrc .zshrc
 

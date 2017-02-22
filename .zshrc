@@ -123,7 +123,7 @@ export PATH="/usr/local/bin:${PATH}"
 # Various stuff might be inside $HOME/bin/:
 export PATH=${PATH}:${HOME}/bin
 # Haskell stuff:
-export PATH=${PATH}:~/Library/Haskell/bin
+export PATH=${PATH}:~/Library/Haskell/bin:$HOME/.local/bin
 # Add RVM to PATH:
 export PATH="$PATH:$HOME/.rvm/bin"
 

@@ -111,6 +111,9 @@ fi
 if [[ $__os =~ "Darwin" ]]; then
     __vim="mvim -v"
     alias l='ls -lAFhG'
+elif [[ $__os =~ "Linux" ]]; then
+    __vim="vim"
+    alias l='ls -lAFhG --color=auto'
 else
     __vim="gvim -v"
     alias l='ls -lAFhG --color=auto'
@@ -401,27 +404,27 @@ sync-date() {
     done
 }
 
+
+view-boot() {
+    if [ "$#" -ne 1 ]; then
+        MGU="${MGU:-mgu-lucia}"
+    else
+        MGU=$1
+    fi
+    ssh $MGU "systemd-analyze -s 3 --detailed plot > /tmp/boot-plot-${MGU}.svg" && scp $MGU:/tmp/boot-plot-$MGU.svg /tmp && open /tmp/boot-plot-$MGU.svg
+}
+
+view-blame() {
+    if [ "$#" -ne 1 ]; then
+        MGU="${MGU:-mgu-lucia}"
+    else
+        MGU=$1
+    fi
+
+    ssh $MGU "systemd-analyze blame"
+}
+
 if [[ $__os =~ "Darwin" ]]; then
-
-    view-boot() {
-        if [ "$#" -ne 1 ]; then
-            MGU="${MGU:-mgu-lucia}"
-        else
-            MGU=$1
-        fi
-
-        ssh $MGU "systemd-analyze -s 3 --detailed plot > /tmp/boot-plot-${MGU}.svg" && scp $MGU:/tmp/boot-plot-$MGU.svg /tmp && open /tmp/boot-plot-$MGU.svg
-    }
-
-    view-blame() {
-        if [ "$#" -ne 1 ]; then
-            MGU="${MGU:-mgu-lucia}"
-        else
-            MGU=$1
-        fi
-
-        ssh $MGU "systemd-analyze blame"
-    }
 
     view-deps() {
         if [ "$#" -lt 1 ]; then
@@ -448,7 +451,7 @@ if [[ $__os =~ "Darwin" ]]; then
 fi
 
 # Development aliases:
-BUILD_BASE_DIR='/media/michaelf/build/base'
+BUILD_BASE_DIR='/media/build/michaelf/base'
 alias go-build="pushd ${BUILD_BASE_DIR}"
 alias clean-build=''
 alias clear-cache=''

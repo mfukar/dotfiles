@@ -29,3 +29,5 @@ ln -s dotfiles/oh-my-zsh .oh-my-zsh
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 ln -s dotfiles/.zshrc .zshrc
 
+# tmux:
+ln -s dotfiles/tmux.conf .tmux.conf

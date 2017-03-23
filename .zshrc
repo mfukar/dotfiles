@@ -123,7 +123,8 @@ export PATH="/usr/local/bin:${PATH}"
 # Various stuff might be inside $HOME/bin/:
 export PATH=${PATH}:${HOME}/bin
 # Haskell stuff:
-export PATH=${PATH}:~/Library/Haskell/bin:$HOME/.local/bin
+export PATH=${PATH}:$HOME/Library/Haskell/bin:$HOME/.local/bin
+export PATH=${PATH}:$HOME/.stack/programs/x86_64-osx/ghc-8.0.1/bin/
 # Add RVM to PATH:
 export PATH="$PATH:$HOME/.rvm/bin"
 
@@ -409,7 +410,7 @@ if [[ $__os =~ "Darwin" ]]; then
             MGU=$1
         fi
 
-        ssh $MGU "systemd-analyze plot > /tmp/boot-plot-${MGU}.svg" && scp $MGU:/tmp/boot-plot-$MGU.svg /tmp && open /tmp/boot-plot-$MGU.svg
+        ssh $MGU "systemd-analyze -s 3 --detailed plot > /tmp/boot-plot-${MGU}.svg" && scp $MGU:/tmp/boot-plot-$MGU.svg /tmp && open /tmp/boot-plot-$MGU.svg
     }
 
     view-blame() {

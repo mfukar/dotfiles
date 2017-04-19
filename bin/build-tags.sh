@@ -9,7 +9,7 @@ OUT_FNAME='cscope.out'
 pushd $CWD
 
 echo -n "Generating tag files.."
-find -P $(pwd) -type f -a \( -name '*.[ch]' -o -name '*.cpp' \) > ./cscope.files
+find -P $(pwd) -type f -a \( -name '*.[ch]' -o -name '*.cpp' -o -name '*.hpp' \) > ./cscope.files
 $CSCOPEBIN -buf $OUT_FNAME
 rm -f ./cscope.files
 

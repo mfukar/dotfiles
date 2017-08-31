@@ -130,6 +130,8 @@ export PATH=${PATH}:$HOME/Library/Haskell/bin:$HOME/.local/bin
 export PATH=${PATH}:$HOME/.stack/programs/x86_64-osx/ghc-8.0.1/bin/
 # Add RVM to PATH:
 export PATH="$PATH:$HOME/.rvm/bin"
+# Load RVM into a shell session *as a function*
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # Make less attempt to display raw chars:
 export LESS="-r -X"

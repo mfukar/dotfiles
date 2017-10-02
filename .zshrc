@@ -452,14 +452,6 @@ if [[ $__os =~ "Darwin" ]]; then
 
 fi
 
-# Development aliases:
-BUILD_BASE_DIR='/media/build/michaelf/base'
-alias go-build="pushd ${BUILD_BASE_DIR}"
-alias clean-build=''
-alias clear-cache=''
-
-alias bb-shell="cd ${BUILD_BASE_DIR} && ./bci-build-scripts/build.sh --bitbake-shell --silent"
-
 
 # Remote-task related stuff, which don't need their own space yet:
 #
@@ -494,4 +486,8 @@ fshow() {
       fi
   done
 }
+
+
+# locale-specific stuff is kept out-of-repo:
+[ -f "${HOME}"/.localerc ] && . "${HOME}"/.localerc
 

@@ -166,6 +166,7 @@ alias golf='ruby ${HOME}/lib/golfscript.rb'
 alias rm='rm -i'
 alias grep="grep -n --color=auto --exclude-dir='.hg' --exclude-dir=\"target.*\""
 alias egrep='grep -E'
+alias tar="tar --exclude='.git' -"
 alias ps='ps -ef'
 # clang-format all .c files you come across:
 alias clang-format-all='find `pwd` -iname "*.h" -or -iname "*.c" -or -iname "*.cpp" -or -iname "*.hpp" | xargs clang-format -i -style=file'

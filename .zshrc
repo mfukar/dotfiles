@@ -177,6 +177,9 @@ alias cmake-build='rm -rf ./build && mkdir -p build && pushd build && cmake .. &
 alias cat-ini='pygmentize -l ini'
 alias cat-unit='cat-ini'
 
+# macOS; force restart mDNSResponder
+alias dns-flush='sudo killall -HUP mDNSResponder'
+
 ### Colours
 #
 # ls colors:

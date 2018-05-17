@@ -213,7 +213,6 @@ c.InteractiveShellApp.exec_PYTHONSTARTUP = True
 # Autoindent IPython code entered interactively.
 c.TerminalInteractiveShell.autoindent = True
 
-#
 # c.TerminalInteractiveShell.quiet = False
 
 # Make IPython automatically call any callable object even if you didn't type
@@ -224,7 +223,6 @@ c.TerminalInteractiveShell.autoindent = True
 # no arguments are present).
 # c.TerminalInteractiveShell.autocall = 0
 
-#
 # c.TerminalInteractiveShell.separate_out2 = ''
 
 # Deprecated, use PromptManager.justify
@@ -243,13 +241,10 @@ c.TerminalInteractiveShell.confirm_exit = False
 # than working
 # c.TerminalInteractiveShell.cache_size = 1000
 
-#
 # c.TerminalInteractiveShell.readline_remove_delims = '-/~'
 
-#
 # c.TerminalInteractiveShell.separate_out = ''
 
-#
 # c.TerminalInteractiveShell.object_info_string_level = 0
 
 # auto editing of files with syntax errors.
@@ -291,7 +286,6 @@ c.TerminalInteractiveShell.highlighting_style = 'friendly'
 # Enable auto setting the terminal title.
 # c.TerminalInteractiveShell.term_title = False
 
-#
 # c.TerminalInteractiveShell.history_length = 10000
 
 # Start logging to the given file in append mode.
@@ -300,7 +294,6 @@ c.TerminalInteractiveShell.highlighting_style = 'friendly'
 # The shell program to be used for paging.
 # c.TerminalInteractiveShell.pager = 'less'
 
-#
 # c.TerminalInteractiveShell.readline_use = True
 
 # A list of ast.NodeTransformer subclass instances, which will be applied to
@@ -340,7 +333,7 @@ c.TerminalInteractiveShell.color_info = False
 # This is the primary interface for producing IPython's prompts.
 
 # Output prompt. '\#' will be transformed to the prompt number
-# c.PromptManager.out_template = 'Out[\\#]: '
+c.PromptManager.out_template = 'out[\\#]: '
 
 # Continuation prompt.
 # c.PromptManager.in2_template = '   .\\D.: '
@@ -352,7 +345,7 @@ c.TerminalInteractiveShell.color_info = False
 # c.PromptManager.color_scheme = 'Linux'
 
 # Input prompt.  '\#' will be transformed to the prompt number
-# c.PromptManager.in_template = 'In [\\#]: '
+c.PromptManager.in_template = 'in [\\#]: '
 
 #------------------------------------------------------------------------------
 # HistoryManager configuration
@@ -439,29 +432,16 @@ c.TerminalInteractiveShell.color_info = False
 
 # PlainTextFormatter will inherit config from: BaseFormatter
 
-#
-# c.PlainTextFormatter.newline = '\n'
 
-#
+c.PlainTextFormatter.newline = '\n'
+
 # c.PlainTextFormatter.singleton_printers = {}
-
-#
 # c.PlainTextFormatter.deferred_printers = {}
-
-#
 # c.PlainTextFormatter.type_printers = {}
-
-#
 # c.PlainTextFormatter.verbose = False
-
-#
-# c.PlainTextFormatter.max_width = 79
-
-#
+c.PlainTextFormatter.max_width = 79
 # c.PlainTextFormatter.float_precision = ''
-
-#
-# c.PlainTextFormatter.pprint = True
+c.PlainTextFormatter.pprint = True
 
 #------------------------------------------------------------------------------
 # IPCompleter configuration

@@ -147,10 +147,11 @@ BLOCKSIZE=K; export BLOCKSIZE
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+# Fuck zsh messing with other program's output:
+export PROMPT_EOL_MARK=''
+
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then

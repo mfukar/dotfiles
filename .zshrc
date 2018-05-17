@@ -173,6 +173,8 @@ alias ps='ps -ef'
 alias clang-format-all='find `pwd` -iname "*.h" -or -iname "*.c" -or -iname "*.cpp" -or -iname "*.hpp" | xargs clang-format -i -style=file'
 # Alias for building with CMake out-of-source:
 alias cmake-build='rm -rf ./build && mkdir -p build && pushd build && cmake .. && popd'
+# Gather user-defined types with ctags, for highlighting with vim:
+alias build-tags='build-tags.sh'
 
 # Pygmentize systemd units and .ini files:
 alias cat-ini='pygmentize -l ini'
@@ -301,26 +303,6 @@ cmp-pairwise() {
 
         array=(${array[@]:1})
     done
-}
-
-# OpenSSL
-function openssl_ca() {
-    CA=${1:-ca}
-
-    # Create the RSA key:
-    openssl genrsa -des3 -out $CA.key 4096
-
-    # Create the CA certificate:
-    openssl req -new -x509 -days 3650 -key $CA.key -out $CA.crt -config openssl.cnf
-
-    # Print the certificate in text form:
-    openssl x509 -noout -text -in $CA.crt
-
-    # Convert to DER:
-    openssl x509 -in $CA.crt -outform der -out $CA.der
-
-    # Convert to PKCS#12:
-    openssl pkcs12 -export -out $CA.pfx -inkey $CA.key -in $CA.crt -certfile $CA.crt
 }
 
 # Python

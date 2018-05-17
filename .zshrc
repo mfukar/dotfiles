@@ -1,5 +1,5 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# Add this repository's ./bin/ to the PATH:
+export PATH="${PATH}:~/dotfiles/bin"
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -103,9 +103,9 @@ umask 077
 unsetopt share_history
 
 # iTerm2's shell integration:
-if [[ $__os =~ "Darwin" ]]; then
-    source ~/.iterm2_shell_integration.`basename $SHELL`
-fi
+#if [[ $__os =~ "Darwin" ]]; then
+#    source ~/.iterm2_shell_integration.`basename $SHELL`
+#fi
 
 # Set aliases overriding those provided by oh-my-zsh.
 if [[ $__os =~ "Darwin" ]]; then
@@ -343,9 +343,8 @@ export PATH="${PATH}:${HOME}/Library/Python/3.6/bin/"
 export NOSE_REDNOSE=1
 
 # Screen & tmux
-# Remind me about any backgrounded screen/tmux sessions
 
-# check for screen sessions
+# Remind me of screen sessions:
 if [ -d /var/run/screen/S-$USER/ ]; then
     n=$(find /var/run/screen/S-$USER/ -type p | wc -l)
     if [ $n -gt 0 ]; then
@@ -355,7 +354,7 @@ if [ -d /var/run/screen/S-$USER/ ]; then
     fi
 fi
 
-# check for tmux sessions
+# Remind me of tmux sessions:
 if [ -x /usr/bin/tmux ]; then
     n=$(tmux list-sessions 2>/dev/null|wc -l)
     if [ $n -gt 0 ]; then
@@ -409,7 +408,6 @@ sync-date() {
         sleep 100;
     done
 }
-
 
 view-boot() {
     if [ "$#" -ne 1 ]; then

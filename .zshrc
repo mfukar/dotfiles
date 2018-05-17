@@ -1,5 +1,5 @@
 # Add this repository's ./bin/ to the PATH:
-export PATH="${PATH}:~/dotfiles/bin"
+export PATH="${PATH}:${HOME}/dotfiles/bin"
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh

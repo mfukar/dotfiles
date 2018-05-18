@@ -4033,6 +4033,5 @@ end
 
 source /Users/michael.foukarakis/Library/Python/2.7/lib/python/site-packages/voltron/entry.py
 
-#EOF
-
 set startup-with-shell off
+

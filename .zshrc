@@ -385,10 +385,12 @@ bmwspeak() {
     echo -e "BMW abbreviation of the day:\n" $(sed "${c}q;d" "${QUOTEFILE}" | sed -e 's/;/ - /') | cowsay | lolcat
 }
 
+# Synchronise the date with a remote client using SSH:
 sync-date() {
+    if [ "$#" -ne 2 ]; then echo "Usage: sync-date <host> <interval>"; fi
     while [ true ]; do
         ssh $1 "date -s \"@$( date +%s )\"" && echo "Date set.";
-        sleep 100;
+        sleep $2;
     done
 }
 
@@ -437,6 +439,8 @@ if [[ $__os =~ "Darwin" ]]; then
 
 fi
 
+# Local and/or secret defs:
+[ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local
 
 # Remote-task related stuff, which don't need their own space yet:
 #

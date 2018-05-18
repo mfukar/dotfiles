@@ -27,3 +27,8 @@
     rebase = true
 [gitreview]
     remote = origin
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false

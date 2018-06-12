@@ -175,13 +175,11 @@ alias clang-format-all='find `pwd` -iname "*.h" -or -iname "*.c" -or -iname "*.c
 alias cmake-build='rm -rf ./build && mkdir -p build && pushd build && cmake .. && popd'
 # Gather user-defined types with ctags, for highlighting with vim:
 alias build-tags='build-tags.sh'
-
-# Pygmentize systemd units and .ini files:
-alias cat-ini='pygmentize -l ini'
-alias cat-unit='cat-ini'
-
 # macOS; force restart mDNSResponder
 alias dns-flush='sudo killall -HUP mDNSResponder'
+# pushd/popd aliases:
+alias pu='pushd'
+alias po='popd'
 
 ### Colours
 #

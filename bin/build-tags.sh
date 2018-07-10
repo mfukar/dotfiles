@@ -2,6 +2,13 @@
 
 CTAGSBIN=`which ctags`
 CSCOPEBIN=`which cscope`
+__os=$(uname)
+
+if [[ $__os =~ "Darwin" ]]; then
+    FIND=$(which gfind)
+else
+    FIND=$(which find)
+fi
 
 CWD=${1:-`pwd`}
 OUT_FNAME='cscope.out'
@@ -10,7 +17,7 @@ pushd $CWD &>/dev/null
 
 STARTTIME=$(date +%s)
 echo "Generating tag files.."
-find -P $(pwd) -type f -a \( -name '*.[ch]' -o -name '*.cpp' -o -name '*.hpp' \) -fprintf cscope.files '"%p"\n'
+$FIND -P $(pwd) -type f -a \( -name '*.[ch]' -o -name '*.cpp' -o -name '*.hpp' \) -fprintf cscope.files '"%p"\n'
 $CSCOPEBIN -buf $OUT_FNAME
 rm -f ./cscope.files
 echo "Gathering user-defined types.."

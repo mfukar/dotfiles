@@ -318,7 +318,7 @@ prep-voltron() {
 
 # Directory under $HOME where Python3-specific packages end up, e.g. nosetests:
 # Might be breaking things under macOS.
-export PATH="${PATH}:${HOME}/Library/Python/3.6/bin/"
+export PATH="${PATH}:${HOME}/Library/Python/3.7/bin/"
 
 # Set up colours for nose. Thankfully non-intrusive:
 export NOSE_REDNOSE=1

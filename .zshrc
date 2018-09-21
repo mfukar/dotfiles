@@ -344,110 +344,13 @@ if [ -x /usr/bin/tmux ]; then
     fi
 fi
 
-# BMW config
-# Depends on the abbreviations file being in ~/Documents/,
-# which is fine for me:
-bmwspeak() {
-    QUOTEFILE="${HOME}/Documents/abbrevs-utf8.csv"
 
-    while getopts ":id" opt; do
-        case $opt in
-            i)
-                CASE_INSENSITIVE='-i'
-                ;;
-            \?)
-                return 1
-                ;;
-        esac
-    done
-
-    # Query terms:
-    if [ "$#" -ne 0 ]; then
-        set -f
-        for term in $*; do
-            defs=$(\grep ${CASE_INSENSITIVE} "^${term}" "${QUOTEFILE}")
-            SIFS=$IFS; IFS=$'\n'
-            for def in $defs; do
-                echo -e "BMW abbreviation of the day:\n ${def}" | sed -e 's/;/ - /' | cowsay | lolcat
-            done
-            IFS=$SIFS
-        done
-        set +f
-        return
-    fi
-
-    # Present a random term:
-    n=$(wc -l "${QUOTEFILE}" | cut -d' ' -f4)
-    c=$(($RANDOM%$n))
-    echo -e "BMW abbreviation of the day:\n" $(sed "${c}q;d" "${QUOTEFILE}" | sed -e 's/;/ - /') | cowsay | lolcat
-}
-
-# Synchronise the date with a remote client using SSH:
-sync-date() {
-    if [ "$#" -ne 2 ]; then echo "Usage: sync-date <host> <interval>"; fi
-    while [ true ]; do
-        ssh $1 "date -s \"@$( date +%s )\"" && echo "Date set.";
-        sleep $2;
-    done
-}
-
-view-boot() {
-    if [ "$#" -ne 1 ]; then
-        MGU="${MGU:-mgu-lucia}"
-    else
-        MGU=$1
-    fi
-    ssh $MGU "systemd-analyze -s 3 --detailed plot > /tmp/boot-plot-${MGU}.svg" && scp $MGU:/tmp/boot-plot-$MGU.svg /tmp && open /tmp/boot-plot-$MGU.svg
-}
-
-view-blame() {
-    if [ "$#" -ne 1 ]; then
-        MGU="${MGU:-mgu-lucia}"
-    else
-        MGU=$1
-    fi
-
-    ssh $MGU "systemd-analyze blame"
-}
-
-if [[ $__os =~ "Darwin" ]]; then
-
-    view-deps() {
-        if [ "$#" -lt 1 ]; then
-            echo "Provide a unit."
-            return -1
-        fi
-
-        if [ "$#" -lt 2 ]; then
-            MGU="${MGU:-mgu-lucia}"
-            UNIT=$1
-        else
-            MGU=$1
-            shift
-            UNIT="$@"
-        fi
-
-        if [ "$#" -gt 1 ]; then
-            ssh $MGU "systemd-analyze dot > /tmp/unit-deps.dot ${UNIT}" && scp $MGU:/tmp/unit-deps.dot /tmp/ && cat /tmp/unit-deps.dot | dot -Tsvg > /tmp/unit-deps.svg && open /tmp/unit-deps.svg
-        else
-            ssh $MGU "systemd-analyze dot > /tmp/${UNIT}-deps.dot ${UNIT}" && scp $MGU:/tmp/$UNIT-deps.dot /tmp && cat /tmp/$UNIT-deps.dot | dot -Tsvg > /tmp/$UNIT-deps.svg && open /tmp/$UNIT-deps.svg
-        fi
-    }
-
-fi
+# BMW-specific stuff:
+[ -f $HOME/.zshrc.bmw ] && . $HOME/.zshrc.bmw
 
 # Local and/or secret defs:
 [ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local
 
-# Remote-task related stuff, which don't need their own space yet:
-#
-# Alias force-connecting to a host via SSH:
-autoconnect() {
-   while [ true ]; do
-       ssh -o ConnectTimeout=5 $1
-       sleep 5
-   done
-}
 
 # Experimental
 

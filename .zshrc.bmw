@@ -35,28 +35,27 @@ bmwspeak() {
     echo -e "BMW abbreviation of the day:\n" $(sed "${c}q;d" "${QUOTEFILE}" | sed -e 's/;/ - /') | cowsay | lolcat
 }
 
+# Synchronise the date with a remote client using SSH:
 sync-date() {
+    if [ "$#" -ne 2 ]; then echo "Usage: sync-date <host> <interval>"; fi
     while [ true ]; do
         ssh $1 "date -s \"@$( date +%s )\"" && echo "Date set.";
-        sleep 100;
+        sleep $2;
     done
 }
 
-if [ $__os = "Darwin" ]; then
-
 view-boot() {
     if [ "$#" -ne 1 ]; then
-        MGU="mgu-lucia"
+        MGU="${MGU:-mgu-lucia}"
     else
         MGU=$1
     fi
-
-    ssh $MGU "systemd-analyze plot > /tmp/boot-plot-${MGU}.svg" && scp $MGU:/tmp/boot-plot-$MGU.svg /tmp && open /tmp/boot-plot-$MGU.svg
+    ssh $MGU "systemd-analyze -s 3 --detailed plot > /tmp/boot-plot-${MGU}.svg" && scp $MGU:/tmp/boot-plot-$MGU.svg /tmp && open /tmp/boot-plot-$MGU.svg
 }
 
 view-blame() {
     if [ "$#" -ne 1 ]; then
-        MGU="mgu-lucia"
+        MGU="${MGU:-mgu-lucia}"
     else
         MGU=$1
     fi
@@ -71,7 +70,7 @@ view-deps() {
     fi
 
     if [ "$#" -lt 2 ]; then
-        MGU="mgu-lucia"
+        MGU="${MGU:-mgu-lucia}"
         UNIT=$1
     else
         MGU=$1
@@ -85,8 +84,6 @@ view-deps() {
         ssh $MGU "systemd-analyze dot > /tmp/${UNIT}-deps.dot ${UNIT}" && scp $MGU:/tmp/$UNIT-deps.dot /tmp && cat /tmp/$UNIT-deps.dot | dot -Tsvg > /tmp/$UNIT-deps.svg && open /tmp/$UNIT-deps.svg
     fi
 }
-
-fi
 
 BUILD_BASE_DIR='/media/michaelf/build/base'
 alias go-build="pushd ${BUILD_BASE_DIR}"

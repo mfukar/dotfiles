@@ -85,14 +85,6 @@ view-deps() {
     fi
 }
 
-BUILD_BASE_DIR='/media/michaelf/build/base'
-alias go-build="pushd ${BUILD_BASE_DIR}"
-alias clean-build=''
-alias clear-cache=''
-
-alias bb-shell="cd ${BUILD_BASE_DIR} && ./bci-build-scripts/build.sh --bitbake-shell --silent"
-
-
 # Remote-task related stuff, which don't need their own space yet:
 #
 # Alias force-connecting to a host via SSH:

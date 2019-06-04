@@ -228,7 +228,7 @@ retry() {
 # compress/uncompress using LZMA:
 7zc()
 {
-    7za a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on archive.7z "$@"
+    7za a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on -v40m archive.7z "$@"
 }
 
 7zu()

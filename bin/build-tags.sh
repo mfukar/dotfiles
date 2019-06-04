@@ -21,6 +21,7 @@ $FIND -P $CWD \
     \( -path "$CWD/Documentation*" -prune \) -o \
     \( -path "$CWD/scripts*" -prune \) -o \
     \( -path "$CWD/drivers*" -prune \) -o \
+    \( -path "$CWD/tests*" -prune \) -o \
     \( -path "$CWD/tools*" -prune \) -o \
     \( -iname '*.[ch]' -o -iname '*.[ch]pp' \) -a \
     -type f -fprintf cscope.files '"%p"\n'
@@ -31,8 +32,10 @@ echo "Gathering user-defined types.."
 find . \( -path "./Documentation*" -prune \) -o \
        \( -path "./scripts*" -prune \) -o \
        \( -path "./drivers*" -prune \) -o \
+       \( -path "./tests*" -prune \) -o \
        \( -iname "*.[ch]" -o -iname "*.[ch]pp" \) -print0 \
  | xargs -0 $CTAGSBIN --c-kinds=gstu --c++-kinds=gstu -f- \
+ | sort -uz \
  | awk 'BEGIN{printf("syntax keyword udType ")} {printf("%s ", $1)} END{print "\nhi def link udType Type"}' > _ud_types.vim
 ENDTIME=$(date +%s)
 

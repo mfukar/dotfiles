@@ -50,7 +50,7 @@ view-boot() {
     else
         MGU=$1
     fi
-    ssh $MGU "systemd-analyze -s 3 --detailed plot > /tmp/boot-plot-${MGU}.svg" && scp $MGU:/tmp/boot-plot-$MGU.svg /tmp && open /tmp/boot-plot-$MGU.svg
+    ssh $MGU "systemd-analyze -s 1.5 --detailed plot > /tmp/boot-plot-${MGU}.svg" && scp $MGU:/tmp/boot-plot-$MGU.svg /tmp && open /tmp/boot-plot-$MGU.svg
 }
 
 view-blame() {

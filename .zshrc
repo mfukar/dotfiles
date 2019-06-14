@@ -121,6 +121,8 @@ fi
 
 # Environment setup
 #
+# zsh - no extended globbing
+unsetopt extendedglob
 # Homebrew:
 export PATH="/usr/local/bin:${PATH}"
 # Various stuff might be inside $HOME/bin/:

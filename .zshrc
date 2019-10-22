@@ -110,13 +110,13 @@ unsetopt share_history
 # Set aliases overriding those provided by oh-my-zsh.
 if [[ $__os =~ "Darwin" ]]; then
     __vim="mvim -v"
-    alias l='ls -lAFhG'
+    alias l='ls -lAFhGn'
 elif [[ $__os =~ "Linux" ]]; then
     __vim="vim"
-    alias l='ls -lAFhG --color=auto'
+    alias l='ls -lAFhGn --color=auto'
 else
     __vim="gvim -v"
-    alias l='ls -lAFhG --color=auto'
+    alias l='ls -lAFhGn --color=auto'
 fi
 
 # Environment setup

@@ -124,7 +124,7 @@ fi
 # zsh - no extended globbing
 unsetopt extendedglob
 # Homebrew:
-export PATH="/usr/local/bin:${PATH}"
+export PATH="${PATH}:/usr/local/bin"
 # Various stuff might be inside $HOME/bin/:
 export PATH=${PATH}:${HOME}/bin
 # Haskell stuff:
@@ -224,7 +224,11 @@ alias cat-unit='cat_ini'
 #
 # retry a command or function until a zero exit code:
 retry() {
-    while [ $? -ne 0 ]; do echo "WARNING: Interrupted" ; "$@" ; done
+    while : ; do
+        "$@"
+        [ $? -eq 0 ] && break
+        echo "WARNING: Command failed, return code $?"
+    done
 }
 
 # compress/uncompress using LZMA:

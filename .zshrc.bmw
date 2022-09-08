@@ -1,3 +1,8 @@
+# Better tools:
+alias l='exa -laF'
+
+export PATH="${PATH}:/usr/local/opt/llvm/bin"
+
 # Depends on the abbreviations file being in ~/Documents/,
 # which is fine for me:
 bmwspeak() {

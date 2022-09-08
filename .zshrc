@@ -170,10 +170,9 @@ alias rm='rm -i'
 alias grep="grep -n --color=auto --exclude-dir='.hg' --exclude-dir=\"target.*\""
 alias egrep='grep -E'
 alias ps='ps -ef'
+alias rsync='rsync -azhx --stats'
 # clang-format all .c files you come across:
 alias clang-format-all='find `pwd` -iname "*.h" -or -iname "*.c" -or -iname "*.cpp" -or -iname "*.hpp" | xargs clang-format -i -style=file'
-# Alias for building with CMake out-of-source:
-alias cmake-build='rm -rf ./build && mkdir -p build && pushd build && cmake .. && popd'
 # Gather user-defined types with ctags, for highlighting with vim:
 alias build-tags='build-tags.sh'
 # macOS; force restart mDNSResponder
@@ -325,10 +324,7 @@ prep-voltron() {
 
 # Directory under $HOME where Python3-specific packages end up, e.g. nosetests:
 # Might be breaking things under macOS.
-export PATH="${PATH}:${HOME}/Library/Python/3.7/bin/"
-
-# Set up colours for nose. Thankfully non-intrusive:
-export NOSE_REDNOSE=1
+export PATH="${PATH}:${HOME}/Library/Python/3.9/bin/"
 
 # Screen & tmux
 
@@ -384,7 +380,15 @@ fshow() {
   done
 }
 
+# Start a CMake out-of-tree build with supplied arguments
+cbuild() {
+    cmake -S . -B build -D CMAKE_BUILD_TYPE=Debug "$@"
+    cmake --build build
+}
+
 
 # locale-specific stuff is kept out-of-repo:
 [ -f "${HOME}"/.localerc ] && . "${HOME}"/.localerc
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

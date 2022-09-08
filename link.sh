@@ -6,6 +6,8 @@
 # git clone <this repo>
 # ./dotfiles/link.sh
 
+echo "Remember to install dependencies: exa"
+
 # git(hub):
 ln -s dotfiles/.gitconfig .gitconfig
 # tmux:
@@ -17,6 +19,8 @@ ln -s dotfiles/.gdbinit .gdbinit
 ln -s dotfiles/.screenrc .screenrc
 ln -s dotfiles/.clang-format .clang-format
 
+# oh-my-zsh:
+git submodule update --init --recursive
 # zsh config:
 ln -s dotfiles/oh-my-zsh .oh-my-zsh
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k

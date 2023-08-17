@@ -49,13 +49,13 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git osx wd)
+plugins=(git fzf wd)
 
 # Find the OS:
 __os=$(uname)
 
-# Workaround for terminator bug:
-[[ $(uname) = "Linux" && $COLORTERM = gnome-terminal && ! $TERM = screen-256color ]] && TERM=xterm-256color
+# Set TERMINFO temporarily:
+export TERMINFO=/usr/share/terminfo
 
 # Custom autocompletion functions:
 if [[ $__os =~ "Darwin" ]]; then

@@ -20,10 +20,14 @@ ln -s dotfiles/.screenrc .screenrc
 ln -s dotfiles/.clang-format .clang-format
 
 # oh-my-zsh:
+cd dotfiles
 git submodule update --init --recursive
+cd ..
 # zsh config:
 ln -s dotfiles/oh-my-zsh .oh-my-zsh
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-ln -s dotfiles/.zshrc.bmw .zshrc.bmw
+ln -s dotfiles/.zshrc.local .zshrc.local
 ln -s dotfiles/.zshrc .zshrc
 
+ln -s vim-stuff .vim
+ln -s vim-stuff/_vimrc .vimrc

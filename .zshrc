@@ -130,10 +130,6 @@ export PATH=${PATH}:${HOME}/bin
 # Haskell stuff:
 export PATH=${PATH}:$HOME/Library/Haskell/bin:$HOME/.local/bin
 export PATH=${PATH}:$HOME/.stack/programs/x86_64-osx/ghc-8.0.1/bin/
-# Add RVM to PATH:
-export PATH="$PATH:$HOME/.rvm/bin"
-# Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # Make less attempt to display raw chars:
 export LESS="-r -X"
@@ -195,7 +191,7 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 cat_json() {
     for jsonfile in "$@"; do
         echo "$(tput bold)$jsonfile$(tput sgr0)"
-        pygmentize $jsonfile
+        pygmentize -O style=native $jsonfile
     done
 }
 
@@ -211,7 +207,7 @@ cat_patch() {
 cat_ini() {
     for unit in "$@"; do
         echo "$(tput bold)$unit$(tput sgr0)"
-        pygmentize -l ini $unit
+        pygmentize -O style=native -l ini $unit
     done
 }
 alias cat-json='cat_json'
@@ -324,7 +320,7 @@ prep-voltron() {
 
 # Directory under $HOME where Python3-specific packages end up, e.g. nosetests:
 # Might be breaking things under macOS.
-export PATH="${PATH}:${HOME}/Library/Python/3.9/bin/"
+export PATH="${PATH}:${HOME}/Library/Python/3.11/bin/"
 
 # Screen & tmux
 
@@ -347,10 +343,6 @@ if [ -x /usr/bin/tmux ]; then
             || echo "You have $n active tmux sessions."
     fi
 fi
-
-
-# BMW-specific stuff:
-[ -f $HOME/.zshrc.bmw ] && . $HOME/.zshrc.bmw
 
 # Local and/or secret defs:
 [ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local
@@ -386,9 +378,7 @@ cbuild() {
     cmake --build build
 }
 
-
 # locale-specific stuff is kept out-of-repo:
 [ -f "${HOME}"/.localerc ] && . "${HOME}"/.localerc
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

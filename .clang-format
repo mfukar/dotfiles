@@ -61,5 +61,3 @@ ForEachMacros:   [ foreach, Q_FOREACH, BOOST_FOREACH ]
 SpaceBeforeParens: Always
 DisableFormat:   false
 ReflowComments: false
-...
-

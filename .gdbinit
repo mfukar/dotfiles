@@ -4031,7 +4031,5 @@ document pwstring
     pwstring s - Prints content, length, capacity and ref-count of wstring s
 end
 
-source /Users/michael.foukarakis/Library/Python/2.7/lib/python/site-packages/voltron/entry.py
-
 set startup-with-shell off
 

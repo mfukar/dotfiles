@@ -1,0 +1,12 @@
+# Optional part of a .zshrc to define flags to use LLVM from homebrew:
+
+#llvm is keg-only, which means it was not symlinked into /usr/local,
+#because macOS already provides this software and installing another version in
+#parallel can cause all kinds of trouble.
+
+LDFLAGS="-L/usr/local/opt/llvm/lib/c++ -Wl,-rpath,/usr/local/opt/llvm/lib/c++"
+
+# export PATH="/usr/local/opt/llvm/bin:$PATH"' >> ~/.zshrc
+
+export LDFLAGS="${LDFLAGS} -L/usr/local/opt/llvm/lib"
+export CPPFLAGS="${CPPFLAGS} -I/usr/local/opt/llvm/include"

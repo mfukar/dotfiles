@@ -16,3 +16,5 @@ Thumbs.db
 # ipython history & ephemeral configuration
 .ipython/profile*/*.sqlite
 .ipython/profile*/startup
+# Tags etc
+.notags

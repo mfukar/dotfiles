@@ -24,10 +24,12 @@ cd dotfiles
 git submodule update --init --recursive
 cd ..
 # zsh config:
-ln -s dotfiles/oh-my-zsh .oh-my-zsh
-git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 ln -s dotfiles/.zshrc.local .zshrc.local
 ln -s dotfiles/.zshrc .zshrc
+ln -s dotfiles/oh-my-zsh .oh-my-zsh
+# the zsh theme:
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
+ln -s dotfiles/.p10k.zsh .p10k.zsh
 
 ln -s vim-stuff .vim
 ln -s vim-stuff/_vimrc .vimrc

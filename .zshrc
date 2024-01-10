@@ -25,7 +25,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=16
+export UPDATE_ZSH_DAYS=24
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -113,11 +113,6 @@ export PATH=${PATH}:$HOME/.stack/programs/x86_64-osx/ghc-8.0.1/bin/
 # Make less attempt to display raw chars:
 export LESS="-r -X"
 
-# Set a suitable pager using vim:
-PAGER="/bin/sh -c \"unset PAGER;col -bx | \
-    $__vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
-    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
-    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""; export PAGER
 # Set a default blocksize for GNU programs (ls, df, du):
 BLOCKSIZE=K; export BLOCKSIZE
 

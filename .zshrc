@@ -362,5 +362,10 @@ cbuild() {
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# powerlevel10k: run `p10k configure` or edit ~/.p10k.zsh to further customise.
+if [ -z "${ZED_TERM}" ]
+then
+    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+else
+    [[ ! -f ~/.p10k-simple.zsh ]] || source ~/.p10k-simple.zsh
+fi

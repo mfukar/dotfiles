@@ -28,15 +28,6 @@ $FIND -P $CWD \
 # $FIND -P $(pwd) -type f -a \( -name '*.[ch]' -o -name '*.cpp' -o -name '*.hpp' \) -fprintf cscope.files '"%p"\n'
 $CSCOPEBIN -bquf $OUT_FNAME
 rm -f ./cscope.files
-echo "Gathering user-defined types.."
-find . \( -path "./Documentation*" -prune \) -o \
-       \( -path "./scripts*" -prune \) -o \
-       \( -path "./drivers*" -prune \) -o \
-       \( -path "./tests*" -prune \) -o \
-       \( -iname "*.[ch]" -o -iname "*.[ch]pp" \) -print0 \
- | xargs -0 $CTAGSBIN --c-kinds=gstu --c++-kinds=gstu -f- \
- | sort -uz \
- | awk 'BEGIN{printf("syntax keyword udType ")} {printf("%s ", $1)} END{print "\nhi def link udType Type"}' > _ud_types.vim
 ENDTIME=$(date +%s)
 
 echo "..done in $(($ENDTIME - $STARTTIME)) seconds. :-)"

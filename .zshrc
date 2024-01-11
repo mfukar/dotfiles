@@ -321,6 +321,20 @@ fi
 
 # Experimental
 
+# disk usage - sort output of `du`
+disk-usage() {
+  AWK = 'awk'
+  [ -f /opt/homebrew/bin/gawk ] && AWK='gawk'
+  du -h $@ |
+   $AWK '{idx = sprintf("%s %08.2f %s",
+         index("KMG", substr($1, length($1))),
+         substr($1, 0, length($1)-1), $0);
+         lines[idx] = $0}
+    END {c = asorti(lines, sorted);
+         for (i = c; i >= 1; i--)
+           print lines[sorted[i]]}'
+}
+
 # fshow - git commit browser (enter for show, ctrl-d for diff) using fzf
 fshow() {
   local out shas sha q k

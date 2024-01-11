@@ -283,18 +283,15 @@ cmp-pairwise() {
 [ -f $HOME/.pythonrc ]  && export PYTHONSTARTUP="${HOME}/.pythonrc"
 [ -d $HOME/lib/python ] && export PYTHONPATH="${HOME}/lib/python"
 
-# Specifically for use with Voltron. On macOS, it completely breaks everything, so the
-# shells can't be used for anything else Python:
-prep-voltron() {
-    if [[ $__os =~ "Darwin" ]]; then
-        [ -d $HOME/Library/Python/2.7/lib/python2.7/site-packages ] && export PYTHONPATH="${HOME}/Library/Python/2.7/lib/python2.7/site-packages"
-        [ -d $HOME/Library/Python/2.7/bin ] && export PATH="${PATH}:${HOME}/Library/Python/2.7/bin"
-    fi
-}
-
 # Directory under $HOME where Python3-specific packages end up, e.g. nosetests:
 # Might be breaking things under macOS.
 export PATH="${PATH}:${HOME}/Library/Python/3.11/bin/"
+
+
+# Build a single file with clang, taking the build command from an existing `compile_commands.json`:
+clang-build-me() {
+    python3  -c 'import json; fh = open("compile_commands.json"); j=json.loads(fh.read()); argv= [i["arguments"] for i in j if "interprocess" in i["file"]][0]; print(" ".join(argv))'
+}
 
 # Screen & tmux
 

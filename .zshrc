@@ -89,10 +89,16 @@ unsetopt share_history
 # Set aliases overriding those provided by oh-my-zsh.
 if [[ $__os =~ "Darwin" ]]; then
     __vim="mvim -v"
-    alias l='ls -lAFhGn'
+    alias l='exa -aln'
+    alias lg='exa -aln --git'
+    alias lx='exa -ln --git --icons --extended'
+    alias tree='exa --tree'
 elif [[ $__os =~ "Linux" ]]; then
     __vim="vim"
-    alias l='ls -lAFhGn --color=auto'
+    alias l='exa -aln'
+    alias lg='exa -aln --git'
+    alias lx='exa -ln --git --icons --extended'
+    alias tree='exa --tree'
 else
     __vim="gvim -v"
     alias l='ls -lAFhGn --color=auto'

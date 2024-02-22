@@ -1,7 +1,4 @@
-# Better tools:
-alias l='exa -laF'
-
-export PATH="${PATH}:/usr/local/opt/llvm/bin"
+export PATH="${PATH}:${HOME}/src/openmpi-installation/bin:/usr/local/opt/llvm/bin"
 
 pcap_protos () {
     c0="\033[0m"

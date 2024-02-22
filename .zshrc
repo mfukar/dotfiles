@@ -197,12 +197,16 @@ alias cat-unit='cat_ini'
 
 # Useful functions
 #
-# retry a command or function until a zero exit code:
+# retry a command or function until a zero exit code,
+# with exponential backoff:
 retry() {
+    ((sleepy = 1))
     while : ; do
         "$@"
         [ $? -eq 0 ] && break
         echo "WARNING: Command failed, return code $?"
+        sleep $sleepy
+        ((sleepy *= 2))
     done
 }
 

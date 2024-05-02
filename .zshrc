@@ -20,7 +20,7 @@ fi
 # Theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
 else
-PS1='%(?.%(!.#.;).%F{6}%B;%b%f) '
+PS1='%(?.%(!.#.;).%F{3}%B;%b%f) '
 fi
 # END OF THEME-ING
 
@@ -113,7 +113,7 @@ fi
 # zsh - no extended globbing
 unsetopt extendedglob
 # Homebrew:
-export PATH="${PATH}:/usr/local/bin"
+export PATH="${PATH}:/usr/local/bin:/opt/homebrew/opt/binutils/bin"
 # Various stuff might be inside $HOME/bin/:
 export PATH=${PATH}:${HOME}/bin
 # Haskell stuff:

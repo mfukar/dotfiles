@@ -110,3 +110,5 @@ autoconnect() {
        sleep 5
    done
 }
+
+eval "$(fzf --zsh)"

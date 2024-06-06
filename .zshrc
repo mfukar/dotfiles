@@ -299,13 +299,16 @@ cmp-pairwise() {
 
 # Directory under $HOME where Python3-specific packages end up, e.g. nosetests:
 # Might be breaking things under macOS.
-export PATH="${PATH}:${HOME}/Library/Python/3.11/bin/"
+export PATH="${PATH}:${HOME}/Library/Python/3.12/bin/"
 
 
 # Build a single file with clang, taking the build command from an existing `compile_commands.json`
 # in the current directory. Uses a python script because attempting to construct the command in the
 # shell is just a pain in the ass:
 clang-build-it() {
+    if [ $# -lt 1 ]; then
+        echo 'Usage: clang-build-it <pathname>'
+    fi
     python3 "${HOME}"/bin/clang-build-it.py "$@"
 }
 

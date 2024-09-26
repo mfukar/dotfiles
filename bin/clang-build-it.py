@@ -4,7 +4,7 @@ def main():
     with open('compile_commands.json') as fh:
         blob = json.loads(fh.read())
     command = [item['arguments'] for item in blob if sys.argv[1] in item['file']]
-    subprocess.run(sum(command,[]))
+    return subprocess.run(sum(command,[])).returncode
 
 if __name__ == '__main__':
     main()

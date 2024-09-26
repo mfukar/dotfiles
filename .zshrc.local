@@ -14,42 +14,6 @@ pcap_protos () {
     done
 }
 
-# Depends on the abbreviations file being in ~/Documents/,
-# which is fine for me:
-bmwspeak() {
-    QUOTEFILE="${HOME}/Documents/abbrevs-utf8.csv"
-
-    while getopts ":id" opt; do
-        case $opt in
-            i)
-                CASE_INSENSITIVE='-i'
-                ;;
-            \?)
-                return 1
-                ;;
-        esac
-    done
-
-    # Query terms:
-    if [ "$#" -ne 0 ]; then
-        set -f
-        for term in $*; do
-            defs=$(\grep ${CASE_INSENSITIVE} "^${term}" "${QUOTEFILE}")
-            SIFS=$IFS; IFS=$'\n'
-            for def in $defs; do
-                echo -e "BMW abbreviation of the day:\n ${def}" | sed -e 's/;/ - /' | cowsay | lolcat
-            done
-            IFS=$SIFS
-        done
-        set +f
-        return
-    fi
-
-    # Present a random term:
-    n=$(wc -l "${QUOTEFILE}" | cut -d' ' -f4)
-    c=$(($RANDOM%$n))
-    echo -e "BMW abbreviation of the day:\n" $(sed "${c}q;d" "${QUOTEFILE}" | sed -e 's/;/ - /') | cowsay | lolcat
-}
 
 # Synchronise the date with a remote client using SSH:
 sync-date() {
@@ -111,4 +75,3 @@ autoconnect() {
    done
 }
 
-eval "$(fzf --zsh)"

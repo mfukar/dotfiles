@@ -93,16 +93,16 @@ unsetopt share_history
 # Set aliases overriding those provided by oh-my-zsh.
 if [[ $__os =~ "Darwin" ]]; then
     __vim="mvim -v"
-    alias l='exa -aln'
-    alias lg='exa -aln --git'
-    alias lx='exa -ln --git --icons --extended'
-    alias tree='exa --tree'
+    alias l='eza -aln'
+    alias lg='eza -aln --git'
+    alias lx='eza -ln --git --icons --extended'
+    alias tree='eza --tree'
 elif [[ $__os =~ "Linux" ]]; then
     __vim="vim"
-    alias l='exa -aln'
-    alias lg='exa -aln --git'
-    alias lx='exa -ln --git --icons --extended'
-    alias tree='exa --tree'
+    alias l='eza -aln'
+    alias lg='eza -aln --git'
+    alias lx='eza -ln --git --icons --extended'
+    alias tree='eza --tree'
 else
     __vim="gvim -v"
     alias l='ls -lAFhGn --color=auto'
@@ -382,11 +382,6 @@ cbuild() {
     cmake -S . -B build -D CMAKE_BUILD_TYPE=Debug "$@"
     cmake --build build
 }
-
-# locale-specific stuff is kept out-of-repo:
-[ -f "${HOME}"/.localerc ] && . "${HOME}"/.localerc
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # powerlevel10k: run `p10k configure` or edit ~/.p10k.zsh to further customise.
 if [ -z "${OMZ_NO_THEME}" ]

@@ -34,3 +34,5 @@
     helper = osxkeychain
 [clean]
     requireForce = false
+[remote "origin"]
+	prune = true

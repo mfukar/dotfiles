@@ -1,0 +1,60 @@
+runcharts:
+  - title: search engine response time
+    position: [[0, 8], [22, 11]]
+    rate-ms: 5000
+    legend:
+        enabled: true
+        details: true
+    scale: 2
+    items:
+      - label: GOOG
+        color: 178
+        sample: curl -o /dev/null -s -w '%{time_total}'  https://www.google.com
+barcharts:
+  - title: Local network activity
+    position: [[22, 8], [24, 11]]
+    rate-ms: 1000
+    scale: 0
+    items:
+      - label: UDP bytes in
+        sample: nettop -J bytes_in -l 1 -m udp | awk '{sum += $4} END {print sum}'
+      - label: UDP bytes out
+        sample: nettop -J bytes_out -l 1 -m udp | awk '{sum += $4} END {print sum}'
+      - label: TCP bytes in
+        sample: nettop -J bytes_in -l 1 -m tcp | awk '{sum += $4} END {print sum}'
+      - label: TCP bytes out
+        sample: nettop -J bytes_out -l 1 -m tcp | awk '{sum += $4} END {print sum}'
+gauges:
+  - title: Year progress
+    position: [[0, 32], [74, -26]]
+    cur:
+        sample: date +%j
+    max:
+        sample: echo 365
+    min:
+        sample: echo 0
+    color: 177
+sparklines:
+  - title: CPU usage
+    position: [[40, 20], [34, 12]]
+    rate-ms: 1000
+    scale: 0
+    sample: ps -A -o %cpu | awk '{s+=$1} END {print s}'
+  - title: Free memory pages
+    position: [[0, 20], [40, 12]]
+    rate-ms: 1000
+    scale: 0
+    sample: memory_pressure | grep 'Pages free' | awk '{print $3}'
+textboxes:
+  - title: Local weather
+    position: [[0, 0], [30, 8]]
+    rate-ms: 3600000
+    sample: curl wttr.in/{Ulm,Athens,Dusseldorf}?format=4
+    border: false
+asciiboxes:
+  - title: Time
+    position: [[33, 0], [28, 8]]
+    rate-ms: 1000
+    color: 43
+    sample: env TZ=Europe/Berlin date +"%H:%M:%S %Z %Y"
+    border: false

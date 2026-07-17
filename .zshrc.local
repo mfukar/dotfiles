@@ -36,17 +36,6 @@ function y() {
     rm -f -- "$tmp"
 }
 
-
-# Remote-task related stuff, which don't need their own space yet:
-#
-# Alias force-connecting to a host via SSH:
-autoconnect() {
-   while [ true ]; do
-       ssh -o ConnectTimeout=5 $1
-       sleep 5
-   done
-}
-
 # Build a specific docker image with a given or pre-defined name format:
 docker_buildimage() {
     if [ $# -ne 1 ]; then

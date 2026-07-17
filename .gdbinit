@@ -53,9 +53,9 @@ set $SHOWCPUREGISTERS = 1
 # set to 1 to enable display of stack (default is 0)
 set $SHOWSTACK = 0
 # set to 1 to enable display of data window (default is 0)
-set $SHOWDATAWIN = 0
+set $SHOWDATAWIN = 1
 # set to 0 to disable coloured display of changed registers
-set $SHOWREGCHANGES = 1
+set $SHOWREGCHANGES = 0
 # set to 1 so skip command to execute the instruction at the new location
 # by default it EIP/RIP will be modified and update the new context but not execute the instruction
 set $SKIPEXECUTE = 0
@@ -77,6 +77,11 @@ end
 set confirm off
 set verbose off
 
+set history filename ~/.gdb_history
+set history size 10000
+set history expansion on
+set history save on
+
 if $COLOUREDPROMPT == 1
     set prompt \033[31mgdb$ \033[0m
 end
@@ -88,7 +93,7 @@ set input-radix 0x10
 set height 0
 set width 0
 
-set $SHOW_CONTEXT = 1
+set $SHOW_CONTEXT = 0
 set $SHOW_NEST_INSN = 0
 
 set $CONTEXTSIZE_STACK = 6
@@ -103,6 +108,9 @@ set print vtbl on
 set print demangle on
 set demangle-style gnu-v3
 set print sevenbit-strings off
+
+# Try to use debuginfod
+set debuginfod enabled on
 
 # __________________end gdb options_________________
 
@@ -2694,7 +2702,7 @@ define step_to_call
 
     set logging file /dev/null
     set logging redirect on
-    set logging on
+    set logging enabled on
 
     set $_cont = 1
     while ($_cont > 0)
@@ -2705,7 +2713,7 @@ define step_to_call
         end
     end
 
-    set logging off
+    set logging enabled off
 
     if ($_saved_ctx > 0)
         context
@@ -2716,12 +2724,12 @@ define step_to_call
 
     set logging file ~/gdb.txt
     set logging redirect off
-    set logging on
+    set logging enabled on
 
     printf "step_to_call command stopped at:\n  "
     x/i $pc
     printf "\n"
-    set logging off
+    set logging enabled off
 
 end
 document step_to_call
@@ -2743,8 +2751,8 @@ define trace_calls
 
     set logging overwrite on
     set logging file ~/gdb_trace_calls.txt
-    set logging on
-    set logging off
+    set logging enabled on
+    set logging enabled off
     set logging overwrite off
 
     while ($_nest > 0)
@@ -2761,7 +2769,7 @@ define trace_calls
         if ($INSN_TYPE == 3)
             set logging file ~/gdb_trace_calls.txt
             set logging redirect off
-            set logging on
+            set logging enabled on
 
             set $x = $_nest - 2
             while ($x > 0)
@@ -2771,13 +2779,13 @@ define trace_calls
             x/i $pc
         end
 
-        set logging off
+        set logging enabled off
         set logging file /dev/null
         set logging redirect on
-        set logging on
+        set logging enabled on
         stepi
         set logging redirect off
-        set logging off
+        set logging enabled off
     end
 
     set $SHOW_CONTEXT = $_saved_ctx
@@ -2801,7 +2809,7 @@ define trace_run
     set logging overwrite on
     set logging file ~/gdb_trace_run.txt
     set logging redirect on
-    set logging on
+    set logging enabled on
     set $_nest = 1
 
     while ( $_nest > 0 )
@@ -2824,7 +2832,7 @@ define trace_run
     set $SHOW_CONTEXT = $_saved_ctx
     set $SHOW_NEST_INSN = 0
     set logging redirect off
-    set logging off
+    set logging enabled off
 
     # clean up trace file
     shell  grep -v ' at ' ~/gdb_trace_run.txt > ~/gdb_trace_run.1

@@ -3,26 +3,11 @@ export PATH="${PATH}:${HOME}/dotfiles/bin"
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-
-# THEME-ING
-#
-# I run two kinds of shells: one which is very focused on work with minimal distractions
-# and another for casual, one-time jobs with various visual elements which prevent things
-# like copy-pasting terminal output elsewhere, etc.
 if [ -z "${OMZ_NO_THEME}" ]; then
-#
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-# Theme
-ZSH_THEME="powerlevel10k/powerlevel10k"
+    ZSH_THEME="powerlevel10k/powerlevel10k"
 else
-PS1='%(?.%(!.#.;).%F{3}%B;%b%f) '
+    PS1='%(?.%(!.#.;).%F{3}%B;%b%f) '
 fi
-# END OF THEME-ING
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -60,7 +45,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf wd iterm2)
+plugins=(git fzf wd iterm2 z)
 
 # Find the OS:
 __os=$(uname)
@@ -208,9 +193,11 @@ retry() {
     while : ; do
         "$@"
         [ $? -eq 0 ] && break
-        echo "WARNING: Command failed, return code $?"
+        echo "WARNING: Command failed, return code $? - will retry after ${sleepy} sec"
         sleep $sleepy
-        ((sleepy *= 2))
+        if ((sleepy < 1024)); then
+            ((sleepy *= 2))
+        fi
     done
 }
 
@@ -336,7 +323,7 @@ fi
 
 # Local and/or secret defs:
 [ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local
-
+[ -f $HOME/.zshrc.llvm ] && . $HOME/.zshrc.llvm
 
 # Experimental
 
@@ -393,3 +380,25 @@ then
         [[ ! -f ~/.p10k-simple.zsh ]] || source ~/.p10k-simple.zsh
     fi
 fi
+
+# shell syntax highlighting on macOS
+if [[ $__os =~ "Darwin" ]]; then
+    eval "$(/opt/homebrew/opt/zsh-patina/bin/zsh-patina activate)"
+fi
+
+# General theme-ing; show how terminal colors look in various terms:
+alias show-termcolors='for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'"'"'\n'"'"'}; done'
+
+dbg() {
+    if [ $# -ne 1 ]; then
+        echo 'Usage: dbg <process-name>'
+    fi
+    procs=$(ps | \grep "$1" | \grep -v grep)
+    if (( $(echo $procs | wc -l) != 1 )); then
+        echo "Too many processes, don't know which to debug:"
+        echo "$procs | awk -F',' '{print $2}'"
+        return
+    fi
+    gdb $(echo $procs | awk '{printf "%s %s", $8, $2}')
+}
+

@@ -21,7 +21,6 @@ $FIND -P $CWD \
     \( -path "$CWD/Documentation*" -prune \) -o \
     \( -path "$CWD/scripts*" -prune \) -o \
     \( -path "$CWD/drivers*" -prune \) -o \
-    \( -path "$CWD/tests*" -prune \) -o \
     \( -path "$CWD/tools*" -prune \) -o \
     \( -iname '*.[ch]' -o -iname '*.[ch]pp' \) -a \
     -type f -fprintf cscope.files '"%p"\n'

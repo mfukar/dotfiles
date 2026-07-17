@@ -1,21 +1,24 @@
 export PATH="${PATH}:${HOME}/src/openmpi-installation/bin:/usr/local/opt/llvm/bin"
 
-pcap_protos () {
+alias unlock='cat ~/.ssh/chameleon-luks.pass | ssh -T chameleon-unlock'
+
+# Show the different protocols in all pcap files in a directory using tshark
+pcap-protos () {
     c0="\033[0m"
-    c1="\033[38;5;228m"
-    c2="\033[38;5;122m"
-    for file in "${1}"/*
+    c1="\033[38;5;226m"
+    bg="\033[48;5;102m"
+    for file in "${1}"/*.pcap
     do
         if [ "$file" != $0 ] ; then
-            echo -e "${c1}${file}${c2}"
-            /Applications/Wireshark.app/Contents/MacOS/tshark -r "$file" -T fields -e frame.protocols | sort -u
+            echo -e "${c1}${bg}${file}"
+            /Users/q411399/Applications/Wireshark.app/Contents/MacOS/tshark -r "$file" -T fields -e frame.protocols | sort -u
             echo -e "${c0}"
         fi
     done
 }
 
 
-# Synchronise the date with a remote client using SSH:
+# eynchronise the date with a remote client using SSH:
 sync-date() {
     if [ "$#" -ne 2 ]; then echo "Usage: sync-date <host> <interval>"; fi
     while [ true ]; do
@@ -24,46 +27,15 @@ sync-date() {
     done
 }
 
-view-boot() {
-    if [ "$#" -ne 1 ]; then
-        MGU="${MGU:-mgu-lucia}"
-    else
-        MGU=$1
-    fi
-    ssh $MGU "systemd-analyze -s 1.5 --detailed plot > /tmp/boot-plot-${MGU}.svg" && scp $MGU:/tmp/boot-plot-$MGU.svg /tmp && open /tmp/boot-plot-$MGU.svg
+# Open yazi on CWD
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
 }
 
-view-blame() {
-    if [ "$#" -ne 1 ]; then
-        MGU="${MGU:-mgu-lucia}"
-    else
-        MGU=$1
-    fi
-
-    ssh $MGU "systemd-analyze blame"
-}
-
-view-deps() {
-    if [ "$#" -lt 1 ]; then
-        echo "Provide a unit."
-        return -1
-    fi
-
-    if [ "$#" -lt 2 ]; then
-        MGU="${MGU:-mgu-lucia}"
-        UNIT=$1
-    else
-        MGU=$1
-        shift
-        UNIT="$@"
-    fi
-
-    if [ "$#" -gt 1 ]; then
-        ssh $MGU "systemd-analyze dot > /tmp/unit-deps.dot ${UNIT}" && scp $MGU:/tmp/unit-deps.dot /tmp/ && cat /tmp/unit-deps.dot | dot -Tsvg > /tmp/unit-deps.svg && open /tmp/unit-deps.svg
-    else
-        ssh $MGU "systemd-analyze dot > /tmp/${UNIT}-deps.dot ${UNIT}" && scp $MGU:/tmp/$UNIT-deps.dot /tmp && cat /tmp/$UNIT-deps.dot | dot -Tsvg > /tmp/$UNIT-deps.svg && open /tmp/$UNIT-deps.svg
-    fi
-}
 
 # Remote-task related stuff, which don't need their own space yet:
 #
@@ -75,3 +47,11 @@ autoconnect() {
    done
 }
 
+# Build a specific docker image with a given or pre-defined name format:
+docker_buildimage() {
+    if [ $# -ne 1 ]; then
+        echo "DOCKER_BUILDKIT=1 docker build --secret id=netrc,src=${HOME}/.netrc -t common.artifactory.cc.bmwgroup.net/node0-lsmf-docker/lsmf-ci-image:$(date +%y)w$(date +%V).$(date +%w) ."
+    else
+        echo "DOCKER_BUILDKIT=1 docker build --secret id=netrc,src=${HOME}/.netrc -t common.artifactory.cc.bmwgroup.net/node0-lsmf-docker/lsmf-ci-image:${1} ."
+    fi
+}

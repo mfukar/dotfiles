@@ -44,7 +44,3 @@ docker_buildimage() {
         echo "DOCKER_BUILDKIT=1 docker build --secret id=netrc,src=${HOME}/.netrc -t common.artifactory.cc.bmwgroup.net/node0-lsmf-docker/lsmf-ci-image:${1} ."
     fi
 }
-
-# zplug config
-source ~/.zplug/init.zsh
-zplug 'wfxr/forgit'

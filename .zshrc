@@ -43,8 +43,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(fzf wd iterm2 z)
 
 # Find the OS:
@@ -65,31 +63,26 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # override the default umask:
-umask 077
+umask 022
 
 # nuke shared history:
 unsetopt share_history
 
-# iTerm2's shell integration:
-#if [[ $__os =~ "Darwin" ]]; then
-#    source ~/.iterm2_shell_integration.`basename $SHELL`
-#fi
-
 # Set aliases overriding those provided by oh-my-zsh.
 if [[ $__os =~ "Darwin" ]]; then
-    __vim="mvim -v"
+    __vim="mvim -v --not-a-term"
     alias l='eza -aln'
     alias lg='eza -aln --git'
     alias lx='eza -ln --git --icons --extended'
     alias tree='eza --tree'
 elif [[ $__os =~ "Linux" ]]; then
-    __vim="vim"
+    __vim="vim --not-a-term"
     alias l='eza -aln'
     alias lg='eza -aln --git'
     alias lx='eza -ln --git --icons --extended'
     alias tree='eza --tree'
 else
-    __vim="gvim -v"
+    __vim="gvim -v --not-a-term"
     alias l='ls -lAFhGn --color=auto'
 fi
 
@@ -130,11 +123,10 @@ fi
 alias vim=$__vim
 alias peek='less -nU'
 alias hexdump='hexdump -C'
-alias golf='ruby ${HOME}/lib/golfscript.rb'
 alias rm='rm -i'
 alias grep="grep -n --color=auto --exclude-dir='.hg' --exclude-dir=\"target.*\""
 alias egrep='grep -E'
-alias ps='ps -ef'
+alias ps='ps -efH'
 alias rsync='rsync -azhx --stats'
 # clang-format all .c files you come across:
 alias clang-format-all='find `pwd` -iname "*.h" -or -iname "*.c" -or -iname "*.cpp" -or -iname "*.hpp" | xargs clang-format -i -style=file'

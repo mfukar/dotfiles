@@ -20,6 +20,7 @@
     slog = log --color --pretty=format:'%C(yellow)%h%Creset | %<(72)%s %Cgreen(%ci)%Creset'
     cdif = diff --word-diff=color
     subupdate = submodule update --init --recursive
+    ifix = !sh -c '_git_commit_HEAD=$(git rev-parse HEAD) && git commit -p --fixup="$_git_commit_HEAD" && unset _git_commit_HEAD'
 [push]
     default = matching
 [gc]
@@ -31,6 +32,8 @@
 [merge]
     tool = vimdiff
     conflictstyle = diff3
+[apply]
+    ignoreWhitespace = change
 [mergetool]
     prompt = false
 [credential]

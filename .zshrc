@@ -126,6 +126,8 @@ alias hexdump='hexdump -C'
 alias rm='rm -i'
 alias grep="grep -n --color=auto --exclude-dir='.hg' --exclude-dir=\"target.*\""
 alias egrep='grep -E'
+# ripgrep has insane defaults:
+alias rg='rg -uuu'
 alias ps='ps -efH'
 alias rsync='rsync -azhx --stats'
 # clang-format all .c files you come across:
@@ -334,7 +336,8 @@ disk-usage() {
            print lines[sorted[i]]}'
 }
 
-# fshow - git commit browser (enter for show, ctrl-d for diff) using fzf
+# fshow - simple git commit browser (enter for show, ctrl-d for diff) using fzf
+# if nothing else works
 fshow() {
   local out shas sha q k
   while out=$(git log --graph --color=always \
@@ -375,7 +378,7 @@ fi
 
 # shell syntax highlighting on macOS
 if [[ $__os =~ "Darwin" ]]; then
-    eval "$(/opt/homebrew/opt/zsh-patina/bin/zsh-patina activate)"
+    # eval "$(/opt/homebrew/opt/zsh-patina/bin/zsh-patina activate)"
 fi
 
 # General theme-ing; show how terminal colors look in various terms:
@@ -392,5 +395,16 @@ dbg() {
         return
     fi
     gdb $(echo $procs | awk '{printf "%s %s", $8, $2}')
+}
+
+# copy-to-pasteboard via OSC 52
+ttcopy() {
+    if [[ -p /dev/stdin ]]; then
+        input=$(cat -)
+    else
+        input=$1
+    fi
+    OUTPUT=$(echo -n $input | base64)
+    printf "\e]52;0;%s\\", $OUTPUT
 }
 

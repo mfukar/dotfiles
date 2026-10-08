@@ -1,55 +1,26 @@
 # INSTALL INSTRUCTIONS: save as ~/.gdbinit
 #
-# DESCRIPTION: A user-friendly gdb configuration file, for x86/x86_64 and ARM platforms.
-#
-# REVISION : 8.0 (13/04/2012)
-#
-# CONTRIBUTORS: mammon_, elaine, pusillus, mong, zhang le, l0kit,
-#               truthix the cyberpunk, fG!, gln
-#
-# FEEDBACK: http://reverse.put.as - reverser@put.as
+# DESCRIPTION: A gdb configuration file, hopefully user-friendly, for x86/x86_64 and ARM
 #
 # NOTES: 'help user' in gdb will list the commands/descriptions in this file
 #        'context on' now enables auto-display of context screen
 #
-# MAC OS X NOTES: If you are using this on Mac OS X or iOS, you must either attach gdb to a process
-#                 or launch gdb without any options and then load the binary file you want to analyse with "exec-file" option
-#                 If you load the binary from the command line, like $gdb binary-name, this will not work as it should
-#                 For more information, read it here http://reverse.put.as/2008/11/28/apples-gdb-bug/
 #
-# UPDATE: This bug can be fixed in gdb source. Refer to http://reverse.put.as/2009/08/10/fix-for-apples-gdb-bug-or-why-apple-forks-are-bad/
-#         and http://reverse.put.as/2009/08/26/gdb-patches/ (if you want the fixed binary for i386)
-#
-#         An updated version of the patch and binary is available at http://reverse.put.as/2011/02/21/update-to-gdb-patches-fix-a-new-bug/
-#
-# CHANGELOG: (older changes at the end of the file)
-#
-#   Version 8.0 (13/04/2012)
-#     - Merged x86/x64 and ARM versions
-#     - Added commands intelsyntax and attsyntax to switch between x86 disassembly flavors
-#     - Added new configuration variables ARM, ARMOPCODES, and X86FLAVOR
-#     - Code cleanups and fixes to the indentation
-#     - Bug fixes to some ARM related code
-#     - Added the dumpmacho command to memory dump the mach-o header to a file
-#
-#   TODO:
-#
-
 # __________________gdb options_________________
 
 # set to 1 to have ARM target debugging as default, use the "arm" command to switch inside gdb
 set $ARM = 0
-# set to 1 to enable 64bits target by default
+# set to 1 to enable 64bit target by default
 set $64BITS = 1
-# set to 0 if you have problems with the colorized prompt - reported by Plouj with Ubuntu gdb 7.2
+# set to 0 if you have problems with the colorised prompt
 set $COLOUREDPROMPT = 1
 # Colour the first line of the disassembly - default is green, if you want to change it search for
 # SETCOLOUR1STLINE and modify it :-)
 set $SETCOLOUR1STLINE = 1
 # set to 0 to remove display of objectivec messages (default is 1)
-set $SHOWOBJECTIVEC = 1
+set $SHOWOBJECTIVEC = 0
 # set to 0 to remove display of cpu registers (default is 1)
-set $SHOWCPUREGISTERS = 1
+set $SHOWCPUREGISTERS = 0
 # set to 1 to enable display of stack (default is 0)
 set $SHOWSTACK = 0
 # set to 1 to enable display of data window (default is 0)
@@ -59,7 +30,7 @@ set $SHOWREGCHANGES = 0
 # set to 1 so skip command to execute the instruction at the new location
 # by default it EIP/RIP will be modified and update the new context but not execute the instruction
 set $SKIPEXECUTE = 0
-# if $SKIPEXECUTE is 1 configure the type of execution
+# with $SKIPEXECUTE == 1 , define what `skip` does:
 # 1 = use stepo (do not get into calls), 0 = use stepi (step into calls)
 set $SKIPSTEP = 1
 # show the ARM opcodes - change to 0 if you don't want such thing (in x/i command)
@@ -73,10 +44,8 @@ else
     set disassembly-flavor att
 end
 
-
 set confirm off
 set verbose off
-
 set history filename ~/.gdb_history
 set history size 10000
 set history expansion on
